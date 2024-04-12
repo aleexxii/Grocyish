@@ -34,7 +34,10 @@ const categorySchema = new mongoose.Schema({
     deletedAt: {
         type: String,
         default: 'listed'
-    }
+    },
+    categoryImage: [{
+        type : String
+    }]
 })
 
 const Category = mongoose.model('Category',categorySchema)

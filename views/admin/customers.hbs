@@ -786,32 +786,71 @@
                                 </div>
                               </div>
                             </td>
-                            <td>{{email}}</td>
+                            <td>{{status}}</td>
                             <td>17 May, 2023 at 3:18pm</td>
                             <td>-</td>
                             <td>$49.00</td>
-<td>
-    <form id="blockForm_{{this._id}}" action="./block-user" method="POST">
-        <input type="hidden" name="userId" value="{{this._id}}">
-        <button type="submit" class="btn btn-success" id="blockBtn_{{this._id}}">Block</button>
-    </form>
-    <form id="unblockForm_{{this._id}}" action="./unblock-user" method="POST" style="display: none;">
-        <input type="hidden" name="userId" value="{{this._id}}">
-        <button type="submit" class="btn btn-danger" id="unblockBtn_{{this._id}}">Unblock</button>
-    </form>
-</td>
+{{!-- <td>
+ 
+    <!-- Block form -->
+   <a id="blockForm_{{this._id}}" href="./block-user?id={{this._id}}">
+    <button type="submit" class="btn btn-success">Block</button>
+</a>
+
+     <!-- Unblock form -->
+    <a id="unblockForm_{{this._id}}" href="./unblock-user?userId={{this._id}}" style="display: none;">
+        <button type="submit" class="btn btn-danger">Unblock</button>
+    </a>
+
+   
+</td> --}}
+  
 
 {{!-- <td>
-    <form id="blockForm_{{this._id}}" action="./block-user" method="POST">
-        <input type="hidden" name="userId" value="{{this._id}}">
-        <button type="submit" class="btn btn-success" id="blockBtn_{{this._id}}">Block</button>
-    </form>
-    <form id="unblockForm_{{this._id}}" action="./unblock-user" method="POST" style="display: none;">
-        <input type="hidden" name="userId" value="{{this._id}}">
-        <button type="submit" class="btn btn-danger" id="unblockBtn_{{this._id}}">Unblock</button>
-    </form>
+    <!-- Block form -->
+    <a href="./block-user?id={{this._id}}" style="{{#unless (status 'Blocked')}}display: none;{{/unless}}">
+        <button type="submit" class="btn btn-success">Block</button>
+    </a>
+    
+    <!-- Unblock form -->
+    <a  href="./unblock-user?userId={{this._id}}" style="{{#if (status 'Blocked')}}display: none;{{/if}}">
+        <button type="submit" class="btn btn-danger">Unblock</button>
+    </a>
+    
 </td> --}}
 
+
+
+<td>
+    {{#eq status 'Blocked'}}
+        <!-- Block form -->
+        <form id="blockForm_{{_id}}" action="./block-user?id={{this._id}}"" method="POST">
+            <input type="hidden" name="id" value="{{_id}}">
+            <button type="submit" class="btn btn-success">Block</button>
+        </form>
+    {{/eq}}
+    {{#eq status 'Unblocked'}}
+        <!-- Unblock form -->
+        <form id="unblockForm_{{_id}}" action="./unblock-user?userId={{this._id}}"" method="POST">
+            <input type="hidden" name="userId" value="{{_id}}">
+            <button type="submit" class="btn btn-danger">Unblock</button>
+        </form>
+  {{/eq}}
+</td>
+
+
+
+
+{{!-- {{#if (eq user.status "Blocked")}}
+    <a href="/admin/unblock?id={{user._id}}" class="btn btn-sm btn-brand rounded font-sm mt-15">
+        Unblock
+    </a>
+{{/if}}
+{{#if (eq user.status "NotBlocked")}}
+    <a href="/admin/block?id={{user._id}}" class="btn btn-sm btn-brand rounded font-sm mt-15">
+        Block
+    </a>
+{{/if}} --}}
 
 
                           </tr>

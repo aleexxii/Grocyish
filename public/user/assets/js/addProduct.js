@@ -80,10 +80,6 @@ document.getElementById("createProduct").addEventListener("click", async () => {
         formData.append('meta_title', meta_title);
         formData.append('meta_description', meta_description);
 
-        // Append image file to FormData
-        // if (imageFile) {
-        //     formData.append('file', imageFile);
-        // }
         for (let i = 0; i < imageFile.length; i++) {
             formData.append('files', imageFile[i]);
         }
@@ -102,8 +98,7 @@ console.log(imageFile,'ith image data');
         const responseData = await response.json();
         console.log(responseData , 'response data'); // Log the response data
         // Do something with the response, like displaying a success message or redirecting the user
-        document.getElementById('response-message').innerHTML = responseData.message;
-        location.reload(); // Reload the page after successful upload
+        window.location.href =  './products';       // redirect the page after successful upload
     } catch (error) {
         console.error('Error:', error);
     }

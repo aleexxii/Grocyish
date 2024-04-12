@@ -199,65 +199,68 @@
 
 
 
-document.addEventListener("DOMContentLoaded", function() {
-    const blockBtns = document.querySelectorAll("[id^='blockBtn_']");
-    const unblockBtns = document.querySelectorAll("[id^='unblockBtn_']");
+// document.addEventListener("DOMContentLoaded", function() {
+//     const blockBtns = document.querySelectorAll("[id^='blockBtn_']");
+//     const unblockBtns = document.querySelectorAll("[id^='unblockBtn_']");
     
-    blockBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(event) {
-            event.preventDefault();
-            const userId = btn.id.split("_")[1];
-            blockUser(userId);
-            document.getElementById(`blockForm_${userId}`).style.display = "none";
-            document.getElementById(`unblockForm_${userId}`).style.display = "block";
-        });
-    });
+//     blockBtns.forEach(function(btn) {
+//         btn.addEventListener("click", function(event) {
+//             event.preventDefault();
+//             const userId = btn.id.split("_")[1];
+//             blockUser(userId);
+//             document.getElementById(`blockForm_${userId}`).style.display = "none";
+//             document.getElementById(`unblockForm_${userId}`).style.display = "block";
+//         });
+//     });
     
-    unblockBtns.forEach(function(btn) {
-        btn.addEventListener("click", function(event) {
-            event.preventDefault();
-            const userId = btn.id.split("_")[1];
-            unblockUser(userId);
-            document.getElementById(`unblockForm_${userId}`).style.display = "none";
-            document.getElementById(`blockForm_${userId}`).style.display = "block";
-        });
-    });
-});
+//     unblockBtns.forEach(function(btn) {
+//         btn.addEventListener("click", function(event) {
+//             event.preventDefault();
+//             const userId = btn.id.split("_")[1];
+//             unblockUser(userId);
+//             document.getElementById(`unblockForm_${userId}`).style.display = "none";
+//             document.getElementById(`blockForm_${userId}`).style.display = "block";
+//         });
+//     });
+// });
 
-function blockUser(userId) {
-    fetch("./block-user", {
-        method: "POST",
-        body: JSON.stringify({ userId: userId }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to block user");
-        }
-        console.log("User blocked successfully");
-    })
-    .catch(error => {
-        console.error("Error blocking user:", error);
-    });
-}
+// function blockUser(userId) {
+//     fetch("./block-user", {
+//         method: "POST",
+//         body: JSON.stringify({ userId: userId }),
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error("Failed to block user");
+//         }
+//         console.log("User blocked successfully");
+//     })
+//     .catch(error => {
+//         console.error("Error blocking user:", error);
+//     });
+// }
 
-function unblockUser(userId) {
-    fetch("./unblock-user", {
-        method: "POST",
-        body: JSON.stringify({ userId: userId }),
-        headers: {
-            "Content-Type": "application/json"
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Failed to unblock user");
-        }
-        console.log("User unblocked successfully");
-    })
-    .catch(error => {
-        console.error("Error unblocking user:", error);
-    });
-}
+// function unblockUser(userId) {
+//     fetch("./unblock-user", {
+//         method: "POST",
+//         body: JSON.stringify({ userId: userId }),
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error("Failed to unblock user");
+//         }
+//         console.log("User unblocked successfully");
+//     })
+//     .catch(error => {
+//         console.error("Error unblocking user:", error);
+//     });
+// }
+
+
+

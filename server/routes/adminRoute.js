@@ -5,6 +5,7 @@ const path = require('path');
 const route = express();
 
 const adminController = require('../controller/adminController');
+// const categoryImageMulter = require('../../middleware/categoryImages')
 
 
 // Set views directory
@@ -23,20 +24,25 @@ const storage = multer.diskStorage({
 // Multer instance with configured storage
 const upload = multer({ storage: storage });
 
-
-
 route.get('/login',adminController.getAdminLogin)
 route.post('/adminhome',adminController.postAdminLogin)
 route.get('/adminHome',adminController.getAdminDashboard)
-route.get('/categories',adminController.getCategories)
 
+//CATEGORIES
+
+route.get('/categories',adminController.getCategories)
 route.get('/edit-category', adminController.editCategoryPage);
 route.post('/edit-category',adminController.editedCategory)
-
 route.get('/add-category',adminController.getAddCategories)
 route.post('/add-category',adminController.postAddCategory)
+route.get('/category-deleted',adminController.categoryDeleting)
+route.get('/deleted-category',adminController.deletedCategory)
+
+
 route.get('/customers',adminController.getCustomers)
 route.get('/order-list',adminController.getOrderList)
+
+//PRODUCTS
 
 route.get('/products',adminController.getProducts)
 route.get('/add-product',adminController.getAddProduct)
@@ -50,9 +56,7 @@ route.get('/product-deleted',adminController.deletingProduct)
 route.get('/vendor',adminController.getVendor)
 route.get('/reviews',adminController.getReviews)
 route.get('/block-user',adminController.userBlock)
-route.get('/category-deleted',adminController.categoryDeleting)
-route.get('/deleted-category',adminController.deletedCategory)
-// route.get('/unblock-user',adminController.userUnblock)
+route.get('/unblock-user',adminController.userUnblock)
 
 // Assuming you are using Express.js
 

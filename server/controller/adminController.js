@@ -50,128 +50,11 @@ const getAddProduct = async (req, res) => {
 };
 
 
-// const postCreateProduct = async (req, res) => {
-//   try {
-//       const {
-//           productName,
-//           category,
-//           weight,
-//           units,
-//           stock,
-//           productCode,
-//           productSKU,
-//           regularPrice,
-//           salePrice,
-//           metaTitle,
-//           metaDescription,
-//           description
-//       } = req.body;
-
-//       let imageData = null;
-//       if (req.files['image'] && req.files['image'].length > 0) {
-
-//         console.log('request log  ->',req.file);
-
-//         // Assuming you're only expecting one file, you can access it with req.files['image'][0]
-//         const uploadedFile = req.files['image'][0];
-//         imageData = {
-//             data: uploadedFile.filename,
-//             contentType: uploadedFile.mimetype
-//         };
-//     }
-
-//       // Create a new product instance
-//       const newProduct = new Product({
-//           productName,
-//           category,
-//           weight,
-//           units,
-//           stock: stock || false,
-//           productCode,
-//           productSKU,
-//           description,
-//           regularPrice,
-//           salePrice,
-//           metaTitle,
-//           metaDescription,
-//           // image: req.file ? req.file.filename : null
-//           image: imageData ? imageData.data : null
-//       });
-
-
-//       // Save the product to the database
-//       await newProduct.save();
-//       console.log('New product:', newProduct);
-
-//       res.redirect("/admin/products");
-//   } catch (error) {
-//       console.error("Error creating product:", error);
-//       res.status(500).json({ error: "An error occurred while creating the product." });
-//   }
-// };
-
-// const postCreateProduct = async (req, res) => {
-//   try {
-//     const {
-//       productName,
-//       category,
-//       weight,
-//       units,
-//       stock,
-//       productCode,
-//       productSKU,
-//       regularPrice,
-//       salePrice,
-//       metaTitle,
-//       metaDescription,
-//       description,
-//     } = req.body;
-
-//     let imageData = null;
-//     if (req.file) {
-//       imageData = {
-//         data: req.file.filename,
-//         contentType: req.file.mimetype,
-//       };
-//     }
-
-//     // Create a new product instance
-//     const newProduct = new Product({
-//       productName,
-//       category,
-//       weight,
-//       units,
-//       stock: stock || false,
-//       productCode,
-//       productSKU,
-//       description,
-//       regularPrice,
-//       salePrice,
-//       metaTitle,
-//       metaDescription,
-//       image: req.body.image ? req.body.image.upload.filename : null,
-//     //   image: req.body.image.upload.filename,
-//     });
-
-//     // Save the product to the database
-//     await newProduct.save();
-//     console.log('ithanu neew product ',newProduct);
-
-//     res.redirect("/admin/products"); // F I X I T
-//   } catch (error) {
-//     console.error("Error creating product:", error);
-//     res
-//       .status(500)
-//       .json({ error: "An error occurred while creating the product." });
-//   }
-// };
-
-
 
 const postCreateProduct = async (req, res) => {
   try {
     console.log('Request body:', req.body);
-    console.log('Uploaded files:', req.files);
+    console.log('Uploaded files:', req.file);
 
     // Destructure required fields from req.body
     const {
@@ -330,10 +213,10 @@ const getCustomers = async (req, res) => {
 const userBlock = async (req, res) => {
   try {
     // Find the user by ID in the database
-    const userId = req.query.userId;
-    console.log("ithanu user id  ->", userId);
-    const user = await User.findByIdAndUpdate(userId);
-    console.log("update cheyyan ulla user", user);
+    const userId = req.query.id;
+    console.log("ithanu user id  ->", req.query.id);
+    const user = await User.findById(userId);
+    console.log("update cheyyan ulla user", User);
 
     if (!user) {
       return res.status(404).json({ error: "User not found" });
@@ -346,7 +229,7 @@ const userBlock = async (req, res) => {
     await user.save();
 
     // // Respond with a success message
-    res.redirect("../customers");
+    res.redirect("./customers");
   } catch (error) {
     console.error("Error blocking user:", error);
     res
@@ -355,36 +238,36 @@ const userBlock = async (req, res) => {
   }
 };
 
-// const userUnblock = async (req, res) => {
+const userUnblock = async (req, res) => {
 
-//     try {
-//         // Find the user by ID in the database
-//         const userId = req.query.userId;
-//         console.log('ithanu unblock user id  ->',userId);
-//         const user = await User.findById(userId);
+    try {
+        // Find the user by ID in the database
+        const userId = req.query.userId;
+        console.log('ithanu unblock user id  ->',userId);
+        const user = await User.findById(userId);
 
-//         if (!user) {
-//             return res.status(404).json({ error: 'User not found' });
-//         }
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
-//         // Update the user's status to 'blocked'
-//         user.status = 'Unblocked';
+        // Update the user's status to 'blocked'
+        user.status = 'Unblocked';
 
-//         // Save the updated user in the database
-//         await user.save();
+        // Save the updated user in the database
+        await user.save();
 
-//         // Respond with a success message
-//         res.redirect('../customers')
-//     } catch (error) {
-//         console.error('Error blocking user:', error);
-//         res.status(500).json({ error: 'An error occurred while blocking the user' });
-//     }
-// };
+        // Respond with a success message
+        res.redirect('../customers')
+    } catch (error) {
+        console.error('Error blocking user:', error);
+        res.status(500).json({ error: 'An error occurred while blocking the user' });
+    }
+};
 
 const getCategories = async (req, res) => {
   try {
     const categories = await Category.find({ deletedAt: "listed" }); // Fetch categories from database
-    console.log("this is category ", categories);
+    // console.log("this is category ", categories);
 
     // Array to store categories with product counts
     const categoryWithProductCount = [];
@@ -398,7 +281,7 @@ const getCategories = async (req, res) => {
         productCount: productCount,
       });
     }
-    console.log("this is product count", categoryWithProductCount);
+    // console.log("this is product count", categoryWithProductCount);
     res.render("categories", { categoryWithProductCount }); // Pass categories data to the template
   } catch (error) {
     console.log(error);
@@ -455,6 +338,8 @@ const getAddCategories = (req, res) => {
 };
 const postAddCategory = async (req, res) => {
   try {
+
+    console.log('req.file aanu ith ',req.file);
     // Extract category data from the request body
     const {
       categoryName,
@@ -465,8 +350,10 @@ const postAddCategory = async (req, res) => {
       status,
       metaTitle,
       metaDescription,
+      categoryImage
     } = req.body;
-    console.log(req.body);
+    console.log('body----->' , req.body);
+    
     // Create a new category instance
     const newCategory = new Category({
       categoryName,
@@ -477,8 +364,9 @@ const postAddCategory = async (req, res) => {
       status,
       metaTitle,
       metaDescription,
+      categoryImage
     });
-
+console.log('newcategory------>' , newCategory);
     // Save the new category to the database
     await newCategory.save();
 
@@ -533,7 +421,7 @@ module.exports = {
   deletedproductPage,
   getCustomers,
   userBlock,
-  // userUnblock,
+  userUnblock,
   getCategories,
   editCategoryPage,
   editedCategory,

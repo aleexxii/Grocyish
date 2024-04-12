@@ -1,5 +1,6 @@
 const User = require("../model/model");
 const Category = require('../model/categoryModel')
+const Products = require('../model/productmodel')
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const OTP = require("../model/userOtpSchema");
@@ -18,8 +19,9 @@ const getHome = async (req, res) => {
       // If the user exists, render the home page with the user's name
       if (user) {
         const categories = await Category.find({})
+        const products = await Products.find({deletedAt : "Not-Deleted"})
         console.log('ithil enthokke undennu nokk ->',categories);
-        return res.render("home",{categories});
+        return res.render("home",{categories , products});
       }
     }
     // If no user session or user not found, redirect to the login page

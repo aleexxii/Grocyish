@@ -917,23 +917,31 @@
                </div>
                <!-- row -->
                <div class="row">
+                  
                   <div class="col-12">
+                    
                      <!-- tab -->
                      <div class="tab-content" id="nav-tabContent">
+                        
                         <div class="tab-pane fade show active" id="nav-fruitsandveg" role="tabpanel" aria-labelledby="nav-fruitsandveg-tab" tabindex="0">
                            <!-- row -->
                            <div class="row row-cols-2 row-cols-xl-5 row-cols-md-3 g-4">
+
+                           {{#each products}}
+
                               <div class="col">
                                  <!-- card -->
                                  <div class="card card-product-v2 h-100">
+                                    
                                     <div class="card-body position-relative">
+                                       
                                        <!-- badge -->
                                        <div class="text-center position-relative">
                                           <div class="position-absolute top-0 start-0">
                                              <span class="badge bg-danger">Sale</span>
                                           </div>
                                           <!-- img -->
-                                          <a href="#!"><img src="../images/products/product-img-1.jpg" alt="Grocery Ecommerce Template" class="mb-3 img-fluid" /></a>
+                                          <a href="#!"><img src="/user/assets/images/productImages/{{image.[0]}}" alt="Grocery Ecommerce Template" class="mb-3 img-fluid" /></a>
                                           <!-- action btn -->
                                           <div class="product-action-btn">
                                              <a href="#!" class="btn-action mb-1" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="bi bi-eye"></i></a>
@@ -941,8 +949,9 @@
                                              <a href="#!" class="btn-action" data-bs-toggle="tooltip" data-bs-html="true" title="Compare"><i class="bi bi-arrow-left-right"></i></a>
                                           </div>
                                        </div>
+                                       
                                        <!-- title -->
-                                       <h2 class="fs-6"><a href="#!" class="text-inherit text-decoration-none">Haldiram's Sev Bhujia</a></h2>
+                                       <h2 class="fs-6"><a href="#!" class="text-inherit text-decoration-none">{{productName}}</a></h2>
                                        <div>
                                           <!-- rating -->
                                           <small class="text-warning">
@@ -957,8 +966,8 @@
                                        <!-- price -->
                                        <div class="d-flex justify-content-between align-items-center mt-3">
                                           <div>
-                                             <span class="text-danger">$18</span>
-                                             <span class="text-decoration-line-through text-muted">$24</span>
+                                             <span class="text-danger">${{salePrice}}</span>
+                                             <span class="text-decoration-line-through text-muted">${{regularPrice}}</span>
                                           </div>
                                           <div><span class="text-uppercase small text-primary">In Stock</span></div>
                                        </div>
@@ -969,11 +978,15 @@
                                           </div>
                                        </div>
                                     </div>
+                                    
                                     <!-- hidden class for hover -->
                                     <div class="product-content-fade border-info" style="margin-bottom: -60px"></div>
                                  </div>
+                                 
                               </div>
-                              <div class="col">
+{{/each}}
+
+                              {{!-- <div class="col">
                                  <!-- card -->
                                  <div class="card card-product-v2 h-100">
                                     <div class="card-body position-relative">
@@ -1383,9 +1396,15 @@
                                     <!-- hidden class for hover -->
                                     <div class="product-content-fade border-info" style="margin-bottom: -60px"></div>
                                  </div>
-                              </div>
+                              </div> --}}
+
+
                            </div>
                         </div>
+
+
+
+
                         <div class="tab-pane fade" id="nav-snackMunchies" role="tabpanel" aria-labelledby="nav-snackMunchies-tab" tabindex="0">
                            <div class="row row-cols-2 row-cols-xl-5 row-cols-md-3 g-4">
                               <div class="col">
@@ -2896,10 +2915,15 @@
                               </div>
                            </div>
                         </div>
+                        
                      </div>
+                  
                   </div>
+                  
                </div>
+               
             </div>
+            
          </section>
          <section>
             <div class="container">

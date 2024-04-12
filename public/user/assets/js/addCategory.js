@@ -11,6 +11,10 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
     const metaTitle = document.getElementById("metaTitle").value;
     const metaDescription = document.getElementById("metaDescription").value;
 
+    const categoryImage = document.getElementById('categoryImage').value
+
+console.log(categoryImage,'category image');
+
 
     // Construct the category Object
     const categoryData = {
@@ -21,10 +25,12 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
         description: description,
         status: status,
         metaTitle: metaTitle,
-        metaDescription: metaDescription
+        metaDescription: metaDescription,
+        categoryImage : categoryImage
     };
 
     console.log('category data varunnundo nokk',categoryData);
+
 
      // Send an AJAX POST request to the backend to add the category
      fetch("/admin/add-category", {
@@ -52,3 +58,4 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
     });
 });
 })
+
