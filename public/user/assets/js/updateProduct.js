@@ -11,6 +11,18 @@ document.getElementById("UpdateProduct").addEventListener("click", async () => {
     const sale_price = document.getElementById("sale_price").value;
     const meta_title = document.getElementById("meta_title").value;
     const meta_description = document.getElementById("meta_description").value;
+
+
+    console.log(product_name);
+    console.log(category);
+    console.log(weight);
+    console.log(units);
+    console.log(product_Code);
+    console.log(sku);
+    console.log(regular_price);
+    console.log(sale_price);
+    console.log(meta_title);
+    console.log(meta_description);
   
     const productName_error = document.getElementById("productName_error");
     const category_error = document.getElementById("category_error");
@@ -20,6 +32,8 @@ document.getElementById("UpdateProduct").addEventListener("click", async () => {
     const regular_price_error = document.getElementById("regular_price_error");
     const sale_price_error = document.getElementById("sale_price_error");
     const productId = document.getElementById("idField").value;
+    
+    
   
     productName_error.innerHTML = "";
     category_error.innerHTML = "";
@@ -49,12 +63,7 @@ document.getElementById("UpdateProduct").addEventListener("click", async () => {
       document.getElementById("selectUnites").focus();
       return;
     }
-    // const files = myDropzone.getAcceptedFiles();
-    // if (files.length === 0) {
-    //   image_error.innerHTML = "Please upload an image";
-    //   return;
-    // }
-    // const image = files[0];
+   
   
     const price_regex = /^\d+(\.\d{1,2})?$/;
     if (!price_regex.test(regular_price) || parseFloat(regular_price) <= 0) {
@@ -68,38 +77,60 @@ document.getElementById("UpdateProduct").addEventListener("click", async () => {
       return;
     }
   
+    const fileInput = document.querySelectorAll('#imageInput');
+    console.log(typeof fileInput , 'file input image');
+    const imageFiles = []
+//  fileInput.forEach((image)=>{
+//  imageFiles.push(image.files)
+// })
+fileInput.forEach((input) => {
+  Array.from(input.files).forEach((file) => {
+      imageFiles.push(file);
+  });
+});
+console.log(imageFiles , 'file input files');
+
+
+
+
     // Access the Quill editor's content
     const description = quill.root.innerHTML;
     // description = description.replace(/^<p>/, '');
-  
-    const product_data = {
-      productName: product_name,
-      category: category,
-      weight: parseFloat(weight),
-      units: units,
-      productCode: product_Code,
-      productSKU: sku,
-      regularPrice: parseFloat(regular_price),
-      salePrice: parseFloat(sale_price),
-      metaTitle: meta_title,
-      metaDescription: meta_description,
-      description: description,
-      // image: image,
-      productId : productId
-    };
-  
+
     try {
-      const response = await fetch("/admin/update-product", {
+
+      const formData = new FormData()
+      formData.append('productName' , product_name )
+      formData.append('category' , category )
+      formData.append('weight' , parseFloat(weight) )
+      formData.append('units' , units )
+      formData.append('productSKU' , sku )
+      formData.append('productCode' , product_Code )
+      formData.append('regularPrice' , parseFloat(regular_price) )
+      formData.append('salePrice' , parseFloat(sale_price) )
+      formData.append('metaTitle' , meta_title )
+      formData.append('metaDescription' , meta_description )
+      formData.append('description' , description )
+
+
+      for (let i = 0; i < imageFiles.length; i++) {
+        formData.append('files', imageFiles[i]);
+    }
+    console.log([...formData.entries()]);  // Log FormData entries
+    console.log(imageFiles); 
+
+
+
+      const response = await fetch(`/admin/update-product?productId=${productId}`, {
         method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(product_data),
+        body: formData
       });
       if (!response.ok) {
         throw new Error("Something went wrong. Please try again");
       } else {
         const response_data = await response.json();
         console.log('aaaaaa',response_data);
-        window.location.href = response_data.redirect
+        // window.location.href = response_data.redirect
       }
     } catch (error) {
         document.getElementById("response-message").innerHTML = error

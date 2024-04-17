@@ -35,7 +35,7 @@ const categorySchema = new mongoose.Schema({
         type: String,
         default: 'listed'
     },
-    categoryImage: [{
+    image: [{
         type : String
     }]
 })

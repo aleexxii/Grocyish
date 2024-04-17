@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['Active', 'Disabled'],
-        default: 'Active',
+        default: 'Available',
         required: true
     },
     regularPrice: {

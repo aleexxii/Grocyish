@@ -6,26 +6,49 @@ const nodemailer = require("nodemailer");
 const OTP = require("../model/userOtpSchema");
 const { cloneDeep } = require("lodash");
 require("dotenv");
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+const Product = require("../model/productmodel");
+const {generateJWT} = require('../helper/setJwtToken');
+const { render } = require("../routes/userRoute");
 
+
+const landingPage = async (req,res)=>{
+try {
+  const categoryItems = await Category.find({deletedAt : 'listed'})
+  const productItems = await Product.find({deletedAt : 'Not-Deleted'})
+  res.render('landingPage' , { categoryItems , productItems })
+} catch (error) {
+  console.log(error);
+}
+}
 const getHome = async (req, res) => {
   try {
-    console.log('session user ==== > ', req.session.user);
+    // console.log('session user ==== > ', req.session.user);
     // Check if a user session exists
-    if (req.session.user) {
-      // Find the user in the database using the email stored in the session
-      const user = await User.findById(req.session.user);
+    // if (req.session.user) {
+    //   // Find the user in the database using the email stored in the session
+      // const user = await User.findById(req.session.user);
       
       // If the user exists, render the home page with the user's name
-      if (user) {
-        const categories = await Category.find({})
-        const products = await Products.find({deletedAt : "Not-Deleted"})
-        console.log('ithil enthokke undennu nokk ->',categories);
+      // if (user) {
+        const categories = await Category.find({deletedAt : 'listed'})
+
+        // const categories = categ.map((category) => {
+        //   return {...category._doc}
+        // })
+
+        const product = await Products.find({deletedAt : "Not-Deleted"})
+
+          const products = product.map((product) => {
+            return {...product._doc}
+          })
+
+        // console.log('ithil enthokke undennu nokk ->',categories);
         return res.render("home",{categories , products});
-      }
-    }
+      // }
+    // }
     // If no user session or user not found, redirect to the login page
-    res.redirect("/login");
+    // res.redirect("/login");
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
@@ -54,44 +77,50 @@ const getLogin = (req, res) => {
 };
 
 const postLogin = async (req, res) => {
+  let loginErrorMessage = ''
   try {
     const findingUser = await User.findOne({ email: req.body.email });
     console.log("user from database =>", findingUser);
 
-    bcrypt.compare(req.body.password, findingUser.password, (err, result) => {
+    if (!findingUser) {
+      loginErrorMessage = 'Invalid email or password';
+      return res.render('login', { loginErrorMessage });
+  }
+
+    bcrypt.compare(req.body.password, findingUser.password, async (err, result) => {
       if (err) {
         // Handle error
         console.error(err);
-        const errorMessage = 'Internal server Error'
-        return res.render('login' , {errorMessage})
+        const loginErrorMessage = 'Internal server Error'
+        return res.render('login' , {loginErrorMessage})
       }
       if (result) {
         // Passwords match
         console.log("Password matched");
-        
         console.log('findingUser.status========>',findingUser.status);
-          if (findingUser.status == 'Unblocked') {
-            req.session.user = findingUser._id
+
+          if (findingUser.status === 'Unblocked') {
+            await generateJWT(findingUser,res)
             res.redirect('/home');
           } else {
-          const errorMessage = 'Your account has been blocked';
-          return res.render('login', { errorMessage });
+           loginErrorMessage = 'Your account has been blocked';
+          return res.render('login', { loginErrorMessage });
           }
       } else {
         // Passwords don't match
         console.log("Password mismatch");
         // Set error message
-        const errorMessage = 'Invalid email or password';
+        loginErrorMessage = 'Invalid email or password';
         // Render login page with error message
-        return res.render('login', { errorMessage });
+        return res.render('login', { loginErrorMessage });
       }
     });
   } catch (error) {
     console.log(error);
     // Set error message
-    const errorMessage = 'Internal Server Error';
+    loginErrorMessage = 'Internal Server Error';
     // Render login page with error message
-    return res.render('login', { errorMessage });
+    return res.render('login', { loginErrorMessage });
   }
 };
 
@@ -223,15 +252,32 @@ const getwishlist = (req , res)=>{
   res.render('wishlist')
 }
 
-const getProductList =(req , res)=>{
+const getCategoryList =(req , res)=>{
   try {
-    res.render('product-list')
+    res.render('category-list')
   } catch (error) {
     console.log(error);
   }
 }
 
+const getProductList = async (req , res)=>{
+try {
+  const productId = req.params.productId
+  console.log(productId,'<-----product id ');
+
+  const products = await Product.findById(productId)
+console.log(products,'<------ product');
+  if(!products){
+    return res.status(404)
+  }
+  res.render('single-product' , { products })
+} catch (error) {
+  console.log(error);
+}
+}
+
 module.exports = {
+  landingPage,
   getLogin,
   postLogin,
   getSignup,
@@ -240,5 +286,6 @@ module.exports = {
   getOtp,
   getHome,
   getwishlist,
+  getCategoryList,
   getProductList
 };

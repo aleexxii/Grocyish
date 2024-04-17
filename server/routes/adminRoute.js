@@ -1,28 +1,20 @@
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
+
+
 
 const route = express();
 
 const adminController = require('../controller/adminController');
-// const categoryImageMulter = require('../../middleware/categoryImages')
+const adminCategory = require('../controller/adminCategory')
+const adminProduct = require('../controller/adminProduct')
+const adminCustomerdetails = require('../controller/adminCustomer')
+const productImageMulter = require('../../middleware/productImageMulter')
+const categoryImageMulter = require('../../middleware/categoryImages')
 
 
 // Set views directory
 route.set('views', './views/admin');
 
-// Multer storage configuration
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'C:/Users/amale/OneDrive/Desktop/Grocyish/public/user/assets/images/productImages') // Destination folder for uploaded files
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.originalname) // Use the original filename
-    }
-});
-
-// Multer instance with configured storage
-const upload = multer({ storage: storage });
 
 route.get('/login',adminController.getAdminLogin)
 route.post('/adminhome',adminController.postAdminLogin)
@@ -30,33 +22,37 @@ route.get('/adminHome',adminController.getAdminDashboard)
 
 //CATEGORIES
 
-route.get('/categories',adminController.getCategories)
-route.get('/edit-category', adminController.editCategoryPage);
-route.post('/edit-category',adminController.editedCategory)
-route.get('/add-category',adminController.getAddCategories)
-route.post('/add-category',adminController.postAddCategory)
-route.get('/category-deleted',adminController.categoryDeleting)
-route.get('/deleted-category',adminController.deletedCategory)
+route.get('/categories',adminCategory.getCategories)
+route.get('/add-category',adminCategory.getAddCategories)
+route.post('/add-category',categoryImageMulter.single('file'),adminCategory.postAddCategory)
+route.get('/edit-category', adminCategory.editCategoryPage);
+route.post('/edit-category',adminCategory.editedCategory)
+route.get('/category-deleted',adminCategory.categoryDeleting)
+route.get('/deleted-category',adminCategory.deletedCategory)
 
 
-route.get('/customers',adminController.getCustomers)
+//CUSTOMERS
+
+route.get('/customers',adminCustomerdetails.getCustomers)
+route.post('/block-user',adminCustomerdetails.userBlock)
+route.post('/unblock-user',adminCustomerdetails.userUnblock)
+
 route.get('/order-list',adminController.getOrderList)
 
 //PRODUCTS
 
-route.get('/products',adminController.getProducts)
-route.get('/add-product',adminController.getAddProduct)
-route.post('/addNewProduct',upload.array('files',5),adminController.postCreateProduct)
-route.get('/edit-product',adminController.editProduct)
-route.post('/update-product',adminController.updatedproductPage)
-route.get('/deleted-product',adminController.deletedproductPage)
-route.get('/product-deleted',adminController.deletingProduct)
+route.get('/products',adminProduct.getProducts)
+route.get('/add-product',adminProduct.getAddProduct)
+route.post('/addNewProduct',productImageMulter.array('files',5),adminProduct.postCreateProduct)
+route.get('/edit-product',adminProduct.editProduct)
+route.post('/update-product',productImageMulter.any(),adminProduct.updatedproductPage)
+route.get('/deleted-product',adminProduct.deletedproductPage)
+route.get('/product-deleted',adminProduct.deletingProduct)
 
 
 route.get('/vendor',adminController.getVendor)
 route.get('/reviews',adminController.getReviews)
-route.get('/block-user',adminController.userBlock)
-route.get('/unblock-user',adminController.userUnblock)
+
 
 // Assuming you are using Express.js
 

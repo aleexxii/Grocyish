@@ -103,8 +103,7 @@ function confirmPasswordChecking() {
   const confirmPassword = document.getElementById("formConfirmPassword").value;
 
   if (password !== confirmPassword) {
-    confirmPasswordFalse.innerHTML =
-      "Password and Confirm Password does not match";
+    confirmPasswordFalse.innerHTML ="Password and Confirm Password does not match";
     confirmPasswordFalse.classList.remove("text-success");
     confirmPasswordFalse.classList.add("text-danger");
   } else {

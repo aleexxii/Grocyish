@@ -3,21 +3,23 @@ const route = express()
 const path = require('path')
 
 const userController = require('../controller/userController')
+const {verifyJWT,checkAuthenticated} = require('../../middleware/authentication')
 
 route.set('views','./views/user')
 // route.use(express.static('public'))
 
 
-
+route.get('/',userController.landingPage)
 route.get('/login',userController.getLogin)
 route.post('/login',userController.postLogin)
-route.get('/signup',userController.getSignup)
-route.get('/home',userController.getHome)
+route.get('/signup',checkAuthenticated,userController.getSignup)
+route.get('/home',verifyJWT,userController.getHome)
 route.post('/signup',userController.postSignup)
 route.get('/forgot-password',userController.getForgotPassword)
 route.post('/generate-otp',userController.getOtp)
-route.get('/wishlist',userController.getwishlist)
-route.get('/product-list',userController.getProductList)
+route.get('/wishlist',verifyJWT,userController.getwishlist)
+route.get('/category-list',userController.getCategoryList)
+route.get('/product-list/:productId',userController.getProductList)
 
 
 

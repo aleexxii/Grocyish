@@ -11,51 +11,47 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
     const metaTitle = document.getElementById("metaTitle").value;
     const metaDescription = document.getElementById("metaDescription").value;
 
-    const categoryImage = document.getElementById('categoryImage').value
+    const fileInput = document.getElementById('fileInput');
+    let imageFile = fileInput.files
 
-console.log(categoryImage,'category image');
+    console.log(imageFile , 'image file');
+    try {
+        const formData = new FormData();
+        formData.append('categoryName' , categoryName)
+        formData.append('slug' , slug)
+        formData.append('parentCategory' , parentCategory)
+        formData.append('date' , date)
+        formData.append('status' , status)
+        formData.append('metaTitle' , metaTitle)
+        formData.append('metaDescription' , metaDescription)
+        formData.append('description' , description)
 
-
-    // Construct the category Object
-    const categoryData = {
-        categoryName: categoryName,
-        slug: slug,
-        parentCategory: parentCategory,
-        date: date,
-        description: description,
-        status: status,
-        metaTitle: metaTitle,
-        metaDescription: metaDescription,
-        categoryImage : categoryImage
-    };
-
-    console.log('category data varunnundo nokk',categoryData);
-
-
-     // Send an AJAX POST request to the backend to add the category
-     fetch("/admin/add-category", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(categoryData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        return response.json();
-    })
-    .then(data => {
-        // Handle success response
-        console.log(data);
-        window.location.href = data.redirect
-        // Optionally, perform any actions after successfully adding the category
-    })
-    .catch(error => {
-        // Handle errors
-        console.error("Error adding category:", error);
-    });
+        if (fileInput.files.length > 0) {
+            formData.append('file', fileInput.files[0]);
+              }
+        fetch("/admin/add-category", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Handle success response
+            console.log(data);
+            window.location.href = data.redirect
+            // Optionally, perform any actions after successfully adding the category
+        })
+        .catch(error => {
+            // Handle errors
+            console.error("Error adding category:", error);
+        });
+    } catch (error) {
+        console.log(error);
+    }
 });
 })
 

@@ -83,7 +83,7 @@ document.getElementById("createProduct").addEventListener("click", async () => {
         for (let i = 0; i < imageFile.length; i++) {
             formData.append('files', imageFile[i]);
         }
-console.log(formData,'ith form data');
+console.log([...formData.entries()],'ith form data');
 console.log(imageFile,'ith image data');
         // Send form data to backend
         const response = await fetch("/admin/addNewProduct", {

@@ -1,14 +1,34 @@
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 
+// Function to verify a JWT
 
-// // Generate a random string of given length
-// function generateRandomString(length) {
-//     return crypto.randomBytes(Math.ceil(length / 2))
-//       .toString('hex') // Convert to hexadecimal format
-//       .slice(0, length); // Trim to desired length
-//   }
+const verifyJWT = (req, res, next) => {
+    const token = req.cookies.userToken;
+    console.log('token----->',token);
+    if (!token) {
+      return res.redirect("/login");
+      // return res.status(401).json({ error: "Unauthorized: No token provided" });
+    }
   
-//   // Generate a secret key of 32 characters (256 bits)
-//   const secretKey = generateRandomString(32);
-//   console.log('Generated secret key:', secretKey);
+    // Verify the token
+    jwt.verify(token, process.env.JWT_SECRET_KEY, (err, user) => {
+      if (err) {
+        return res.status(403).json({ error: "Forbidden: Invalid token" });
+      }
+      req.user = user;
+      next();
+    });
+  };
 
+
+  const checkAuthenticated = (req, res, next) => {
+    const token = req.cookies.userToken;
+  
+    if (token) {
+      return res.redirect("/home");
+    } else {
+      next();
+    }
+  };
+
+  module.exports = { verifyJWT , checkAuthenticated}
