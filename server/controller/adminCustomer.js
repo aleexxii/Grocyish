@@ -1,12 +1,27 @@
+const { regex } = require("uuidv4");
 const User = require("../model/model");
+const { options, search } = require("../routes/userRoute");
 
 const getCustomers = async (req, res) => {
     try {
-      const custo = await User.find();
+
+      let search = '';
+      if(req.query.search){
+        search = new RegExp('.*' + req.query.search + '.*' , 'i')
+      }
+
+      const custo = await User.find({$or : [
+        {fname : { $regex : search }},
+        {lname : { $regex : search}},
+        {email : { $regex : search}}
+      ]});
   
-      const customers = custo.map((user) => {
+      let customers = custo.map((user) => {
         return {...user._doc}
       })
+      // const page = Number(req.query.page) || 1;
+      // const limit = Number(req.query.limit) || 5;
+      
       res.render("customers", { customers });
     } catch (error) {
       console.log(error);

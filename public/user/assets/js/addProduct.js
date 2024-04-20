@@ -59,8 +59,52 @@ document.getElementById("createProduct").addEventListener("click", async () => {
 
 
       // Get the file input element
-      const fileInput = document.getElementById('fileInput');
-      let imageFile = fileInput.files
+      // const fileInput = document.getElementById('fileInput');
+      const imageContainer = document.getElementById('imageContainer')
+      console.log(imageContainer , 'images div');
+      const imageItems = imageContainer.querySelectorAll('.imageItem img')
+      console.log(imageItems , 'imageItems');
+      let imageFile = []
+
+      imageItems.forEach((img) => {
+        const src = img.src;
+
+// EXTRACT Base64 data from src attribute
+        const base64Data = src.split(',')[1]
+
+        // Create a Blob object from the Base64 data
+  const blob = b64toBlob(base64Data, 'image/jpeg');
+
+          // Create a File object from the Blob
+  const file = new File([blob], `image${Date.now()}.jpeg`, { type: 'image/jpeg' });
+  
+imageFile.push(file)
+      });
+
+      // Function to convert Base64 to Blob
+function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+  const byteCharacters = atob(b64Data);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+    const slice = byteCharacters.slice(offset, offset + sliceSize);
+    
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+    
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, { type: contentType });
+  return blob;
+}
+
+      console.log(imageFile , 'image file getting array');
+
+
 
       // Check if a file is selected
     //   if (fileInput.files.length > 0) {

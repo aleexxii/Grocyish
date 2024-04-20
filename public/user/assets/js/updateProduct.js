@@ -13,6 +13,9 @@ document.getElementById("UpdateProduct").addEventListener("click", async () => {
     const meta_description = document.getElementById("meta_description").value;
 
 
+
+
+
     console.log(product_name);
     console.log(category);
     console.log(weight);
@@ -77,21 +80,30 @@ document.getElementById("UpdateProduct").addEventListener("click", async () => {
       return;
     }
   
+
+
+
+
+
+
+
     const fileInput = document.querySelectorAll('#imageInput');
     console.log(typeof fileInput , 'file input image');
     const imageFiles = []
-//  fileInput.forEach((image)=>{
-//  imageFiles.push(image.files)
-// })
+
 fileInput.forEach((input) => {
   Array.from(input.files).forEach((file) => {
       imageFiles.push(file);
   });
 });
+
+
+// Get the product images
+document.querySelectorAll('.image-item img').forEach(img => {
+  imageFiles.push(img.getAttribute('src').split('/').pop()); // Extract image name from the src URL
+});
+
 console.log(imageFiles , 'file input files');
-
-
-
 
     // Access the Quill editor's content
     const description = quill.root.innerHTML;
@@ -130,7 +142,7 @@ console.log(imageFiles , 'file input files');
       } else {
         const response_data = await response.json();
         console.log('aaaaaa',response_data);
-        // window.location.href = response_data.redirect
+        window.location.href = response_data.redirect
       }
     } catch (error) {
         document.getElementById("response-message").innerHTML = error

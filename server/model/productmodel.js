@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
     stockKeepingUnit: String,        // stock keeping unit
     status: {
         type: String,
-        enum: ['Active', 'Disabled'],
+        enum: ['Available', 'Disabled'],
         default: 'Available',
         required: true
     },

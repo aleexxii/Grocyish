@@ -21,6 +21,9 @@ const signUpSchema = new mongoose.Schema ({
     status : {
         type : String,
         default : "Unblocked"
+    },
+    googleId : {
+        type : String
     }
 })
 

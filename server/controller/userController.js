@@ -9,7 +9,7 @@ require("dotenv");
 const jwt = require('jsonwebtoken');
 const Product = require("../model/productmodel");
 const {generateJWT} = require('../helper/setJwtToken');
-const { render } = require("../routes/userRoute");
+
 
 
 const landingPage = async (req,res)=>{
@@ -23,14 +23,6 @@ try {
 }
 const getHome = async (req, res) => {
   try {
-    // console.log('session user ==== > ', req.session.user);
-    // Check if a user session exists
-    // if (req.session.user) {
-    //   // Find the user in the database using the email stored in the session
-      // const user = await User.findById(req.session.user);
-      
-      // If the user exists, render the home page with the user's name
-      // if (user) {
         const categories = await Category.find({deletedAt : 'listed'})
 
         // const categories = categ.map((category) => {
@@ -45,27 +37,11 @@ const getHome = async (req, res) => {
 
         // console.log('ithil enthokke undennu nokk ->',categories);
         return res.render("home",{categories , products});
-      // }
-    // }
-    // If no user session or user not found, redirect to the login page
-    // res.redirect("/login");
   } catch (error) {
     console.error("Error:", error);
     res.status(500).send("Internal Server Error");
   }
-//   try {
-//     if (req.session.user) {
-//       const user = await User.findOne({ email: req.session.user });
-//       if (user) {
-//         const { name } = user;
-//         return res.render("home", { user: name });
-//       }
-//     }
-//     res.redirect("/login");
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).send("Internal Server Error");
-//   }
+
 };
 
 const getLogin = (req, res) => {
@@ -276,6 +252,18 @@ console.log(products,'<------ product');
 }
 }
 
+const userOrders = async ( req , res) => {
+  res.render('account-orders')
+}
+
+const userLogOut = ( req , res ) => {
+  res.clearCookie('userToken');
+
+  // Redirect to login page or home page
+  res.redirect('/login');
+
+}
+
 module.exports = {
   landingPage,
   getLogin,
@@ -287,5 +275,7 @@ module.exports = {
   getHome,
   getwishlist,
   getCategoryList,
-  getProductList
+  getProductList,
+  userOrders,
+  userLogOut
 };

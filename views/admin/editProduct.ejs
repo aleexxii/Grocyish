@@ -597,12 +597,16 @@
 
 							  <div class="mb-3 col-lg-12 mt-5 text-center">
 								<h4 class="mb-3 h5">Product images</h4>
-								<img src="/user/assets/images/productImages/<%= productEditingPage.image %>" alt="" id="productImage">
-								<div>
-									<button type="button" class="btn btn-outline-danger btn-sm" onclick="removeImage()">Remove</button>
+								<% productEditingPage.image.forEach((image, index) => { %>
+								<div class="image-item">
+									<img src="/user/assets/images/productImages/<%= image %>" alt="" class="img-fluid">
+									<div>
+										<button type="button" class="btn btn-outline-danger btn-sm" onclick="removeImage(this)">Remove</button>
+									</div>
 								</div>
+								<% }) %>
 							</div>
-
+							
 							
 							<div class="mb-3 col-lg-12 mt-3 text-center">
 								<input type="file"  class="visually-hidden" name="files" multiple />
@@ -708,13 +712,10 @@
 		
       </div>
 	  <script>
-		function removeImage(event) {
-			var imageElement = document.getElementById("productImage");
-        	imageElement.parentNode.removeChild(imageElement);
-
-			const btnremove = document.querySelector('btn-outline-danger')
-			btnremove.parentNode.removeChild(btnremove)
-		}
+		function removeImage(buttonElement) {
+    var imageDiv = buttonElement.closest('.image-item');
+    imageDiv.parentNode.removeChild(imageDiv);
+}
 	
 		function addMoreImages() {
 			var imageDiv = document.createElement("div");

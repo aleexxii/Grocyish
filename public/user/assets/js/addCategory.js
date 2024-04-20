@@ -14,6 +14,13 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
     const fileInput = document.getElementById('fileInput');
     let imageFile = fileInput.files
 
+
+    if (!categoryName || !slug || !date || !status || !fileInput.files[0]) {
+        categoryFieldError.innerHTML='Please fill in all required fields'
+        return; // Exit the function if validation fails
+    }
+
+
     console.log(imageFile , 'image file');
     try {
         const formData = new FormData();
@@ -34,6 +41,7 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
             body: formData
         })
         .then(response => {
+            console.log(response,'<----response');
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
@@ -42,12 +50,18 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
         .then(data => {
             // Handle success response
             console.log(data);
-            window.location.href = data.redirect
-            // Optionally, perform any actions after successfully adding the category
+            if(data.redirect){
+                window.location.href = data.redirect
+            }
+             if (data.Error) {
+                document.getElementById('errorMessage').innerHTML = data.Error 
+                document.getElementById('errorMessage').focus()
+            }
         })
         .catch(error => {
             // Handle errors
-            console.error("Error adding category:", error);
+            console.error("Error fetching data:", error);
+            
         });
     } catch (error) {
         console.log(error);

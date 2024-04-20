@@ -7,12 +7,25 @@ const User = require("../model/model");
 
 const getCategories = async (req, res) => {
     try {
-      const category = await Category.find({ deletedAt: "listed" }); // Fetch categories from database
+
+      let search = ''
+      if(req.query.search){
+        search = new RegExp('.*' + req.query.search + '.*' , 'i')
+      }
+
+      const category = await Category.find(
+        { deletedAt: "listed" ,
+      $or :[
+        {categoryName : {$regex : search}}
+      ]}
+      ); // Fetch categories from database
   
       const categories = category.map((category)=>{
         return {...category._doc}
       })
-      // console.log("this is category ", categories);
+     
+       // Sort categories by _id in descending order
+    categories.sort((a, b) => b._id.getTimestamp() - a._id.getTimestamp());
   
       // Array to store categories with product counts
       const categoryWithProductCount = [];
@@ -108,6 +121,12 @@ const getCategories = async (req, res) => {
        const image = req.file.filename
        console.log(image,'image name');
       
+      const existingCategory = await Category.findOne({categoryName})
+    console.log(existingCategory,'existing category');
+      if( existingCategory ){
+        return res.status(200).json({Error : 'Category is already exists'})
+      }
+
       // Create a new category instance
       const newCategory = new Category({
         categoryName,
