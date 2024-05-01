@@ -4,7 +4,6 @@ const Products = require('../model/productmodel')
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const OTP = require("../model/userOtpSchema");
-const { cloneDeep } = require("lodash");
 require("dotenv");
 const jwt = require('jsonwebtoken');
 const Product = require("../model/productmodel");
@@ -53,13 +52,13 @@ const getLogin = (req, res) => {
 };
 
 const postLogin = async (req, res) => {
-  let loginErrorMessage = ''
+  let loginErrorMessage = '';
   try {
     const findingUser = await User.findOne({ email: req.body.email });
-    console.log("user from database =>", findingUser);
+    // console.log("user from database =>", findingUser);
 
     if (!findingUser) {
-      loginErrorMessage = 'Invalid email or password';
+      loginErrorMessage = 'User not found';
       return res.render('login', { loginErrorMessage });
   }
 
@@ -67,13 +66,13 @@ const postLogin = async (req, res) => {
       if (err) {
         // Handle error
         console.error(err);
-        const loginErrorMessage = 'Internal server Error'
+        loginErrorMessage = 'Internal server Error'
         return res.render('login' , {loginErrorMessage})
       }
       if (result) {
         // Passwords match
-        console.log("Password matched");
-        console.log('findingUser.status========>',findingUser.status);
+        // console.log("Password matched");
+        // console.log('findingUser.status========>',findingUser.status);
 
           if (findingUser.status === 'Unblocked') {
             await generateJWT(findingUser,res)
@@ -84,9 +83,9 @@ const postLogin = async (req, res) => {
           }
       } else {
         // Passwords don't match
-        console.log("Password mismatch");
+        // console.log("Password mismatch");
         // Set error message
-        loginErrorMessage = 'Invalid email or password';
+        loginErrorMessage = 'Invalid password';
         // Render login page with error message
         return res.render('login', { loginErrorMessage });
       }
@@ -134,7 +133,7 @@ async function sendOTP(email, otp) {
     text: `Your OTP for verification is: ${otp}`,
   });
 
-  console.log("Message sent: %s", info.messageId);
+  // console.log("Message sent: %s", info.messageId);
 }
 
 // Handle POST request to generate and send OTP
@@ -162,7 +161,6 @@ const postSignup = async (req, res) => {
   try {
     // Extract user details from request body
     const { firstname, lastname, email, password, otp } = req.body;
-    console.log(req.body);
 
     // Check if the user with the same email already exists
     const existingUser = await User.findOne({ email: email });
@@ -176,7 +174,7 @@ const postSignup = async (req, res) => {
       if (userOTP) {
         // Compare the user-provided OTP with the OTP from the database
         if (otp === userOTP.otp) {
-          console.log(otp, "userotp => ", userOTP.otp);
+          // console.log(otp, "userotp => ", userOTP.otp);
 
           // Hash the password
           const hashedPassword = await bcrypt.hash(password, 10);
@@ -216,14 +214,6 @@ const postSignup = async (req, res) => {
   }
 };
 
-const getForgotPassword = (req, res) => {
-  try {
-    res.render("forgotPassword");
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 const getwishlist = (req , res)=>{
   res.render('wishlist')
 }
@@ -239,10 +229,9 @@ const getCategoryList =(req , res)=>{
 const getProductList = async (req , res)=>{
 try {
   const productId = req.params.productId
-  console.log(productId,'<-----product id ');
+  // console.log(productId,'<-----product id ');
 
   const products = await Product.findById(productId)
-console.log(products,'<------ product');
   if(!products){
     return res.status(404)
   }
@@ -270,7 +259,6 @@ module.exports = {
   postLogin,
   getSignup,
   postSignup,
-  getForgotPassword,
   getOtp,
   getHome,
   getwishlist,

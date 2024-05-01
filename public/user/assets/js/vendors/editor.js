@@ -38,6 +38,5 @@ if (editorElement) {
     });
 
     // Access the content of the Quill editor
-    const description = quill.root.innerHTML;
-    console.log('this is my product description--->',description);
+    // const description = quill.root.innerHTML;
 }

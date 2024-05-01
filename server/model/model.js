@@ -24,6 +24,9 @@ const signUpSchema = new mongoose.Schema ({
     },
     googleId : {
         type : String
+    },
+    phone : {
+        type : Number
     }
 })
 

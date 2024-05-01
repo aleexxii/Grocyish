@@ -563,6 +563,7 @@
 								 <input type="text" class="form-control" name="productName" id="productName" value="<%= productEditingPage.productName %>" required />
 								 <span id="productName_error" class="text-danger"></span>
 							  </div>
+							  <span id="product_err" class="text-danger"></span>
 							  <!-- input -->
 							  <div class="mb-3 col-lg-6">
 								 <label class="form-label">Product Category</label>
@@ -599,7 +600,7 @@
 								<h4 class="mb-3 h5">Product images</h4>
 								<% productEditingPage.image.forEach((image, index) => { %>
 								<div class="image-item">
-									<img src="/user/assets/images/productImages/<%= image %>" alt="" class="img-fluid">
+									<img src="../user/assets/images/productImages/<%= image %>" alt="" class="img-fluid">
 									<div>
 										<button type="button" class="btn btn-outline-danger btn-sm" onclick="removeImage(this)">Remove</button>
 									</div>
@@ -746,7 +747,7 @@
 			});
 	
 			var imagePreview = document.createElement("img");
-			imagePreview.className = "preview-image";
+			imagePreview.className = "preview-image img-fluid";
 			imagePreview.style.display = "none";
 	
 			imageDiv.appendChild(imageInput);

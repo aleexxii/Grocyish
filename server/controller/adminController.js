@@ -17,7 +17,7 @@ const getAdminDashboard = (req, res) => {
 const postAdminLogin = async (req, res) => {
   try {
     const findingAdmin = await Admin.findOne({ email: req.body.email });
-    console.log(findingAdmin);
+    // console.log(findingAdmin);
     if (findingAdmin && findingAdmin.password == req.body.password) {
       res.render("adminHome");
     } else {

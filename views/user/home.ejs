@@ -215,7 +215,7 @@
 						</a>
 					</div>
 					<div class="list-inline-item">
-						<a class="text-reset position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="#offcanvasExample" role="button" aria-controls="offcanvasRight">
+						<a class="text-reset position-relative" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" href="/addToCart" role="button" aria-controls="offcanvasRight">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="20"
@@ -966,9 +966,11 @@
                                                  <div><span class="text-uppercase small text-primary">In Stock</span></div>
                                              </div>
                                              <!-- btn -->
+                                             
                                              <div class="product-fade-block">
+                                                <input class="productId" value="<%= product._id %>">
                                                  <div class="d-grid mt-4">
-                                                     <a href="#" class="btn btn-primary rounded-pill">Add to Cart</a>
+                                                     <a class="btn btn-primary rounded-pill addToCartBtn">Add to Cart</a>
                                                  </div>
                                              </div>
                                          </div>
@@ -3725,6 +3727,7 @@
   </div>
 </footer>
       <!-- Javascript-->
+      <script src="../../user/assets/js/addToCart.js"></script>
       <!-- Libs JS -->
 <!-- <script src="../libs/jquery/dist/jquery.min.js"></script> -->
 <script src="../libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

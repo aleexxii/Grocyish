@@ -80,11 +80,14 @@
                     
 
 
-                     <form action="/login" method="post" class="needs-validation" novalidate>
+                     <form action="/login" method="post" class="needs-validation" id="loginForm" novalidate>
                         <div class="row g-3">
                            <!-- row -->
 
                            <div class="col-12">
+                            <% if (typeof loginErrorMessage !== 'undefined') { %>
+                              <p style="color: red;" id="errorMessage"><%= loginErrorMessage %></p>
+                          <% } %>
                               <!-- input -->
                               <label for="formSigninEmail" class="form-label visually-hidden">Email address</label>
                               <input type="email" class="form-control" id="formSigninEmail" placeholder="Email" name="email" required />
@@ -123,7 +126,7 @@
                           </div>
                            <div>
                               Don’t have an account?
-                              <a href="/signup">Sign Up</a>
+                              <a href="./signup">Sign Up</a>
                            </div>
                         </div>
                      </form>
@@ -287,9 +290,11 @@
   </div>
 </footer>
       <!-- Javascript-->
+
       <script>
-        history.forward();
-      </script>
+        // history.forward();
+      
+    </script>
       <!-- Libs JS -->
 <!-- <script src="/libs/jquery/dist/jquery.min.js"></script> -->
 <script src="../libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -16,7 +16,7 @@
       href="../images/favicon/favicon.ico"
     />
 
-    {{!-- C S S L I N K --}}
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -1070,7 +1070,9 @@
         </div>
       </main>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
     <script>
       $(document).ready(function () {
         var cropper;
@@ -1154,119 +1156,5 @@
     <script src="../libs/quill/dist/quill.min.js"></script>
     <script src="../js/vendors/editor.js"></script>
     <script src="../js/addProduct.js"></script>
-  </body>
-</html>
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Add Product Dashboard eCommerce HTML Template - FreshCart</title>
-    <link href="../libs/dropzone/dist/min/dropzone.min.css" rel="stylesheet" />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="../images/favicon/favicon.ico"
-    />
-
-    {{!-- C S S L I N K --}}
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css"
-    />
-
-    <link
-      href="../libs/bootstrap-icons/font/bootstrap-icons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="../libs/feather-webfont/dist/feather-icons.css"
-      rel="stylesheet"
-    />
-    <link href="../libs/simplebar/dist/simplebar.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../css/theme.min.css" />
-  </head>
-
-  <body>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-
-    <script>
-      $(document).ready(function () {
-        var cropper;
-        var currentImageItem; // Variable to store the currently selected image item
-
-        $("#imageContainer").on("click", ".imageItem img", function () {
-          var imageUrl = $(this).attr("src");
-          $("#modalImage").attr("src", imageUrl);
-          $("#imageModal").modal("show");
-          currentImageItem = $(this).closest(".imageItem"); // Store the currently selected image item
-          cropper.replace(imageUrl);
-        });
-
-        $("#cropBtn").click(function () {
-          if (cropper) {
-            cropper.crop();
-          }
-        });
-
-        $("#saveBtn").click(function () {
-          if (cropper && currentImageItem) {
-            var croppedCanvas = cropper.getCroppedCanvas();
-            var croppedImage = croppedCanvas.toDataURL();
-            currentImageItem.find("img").attr("src", croppedImage); // Replace only the current image in the container
-            $("#imageModal").modal("hide");
-          }
-        });
-
-        $("#insertBtn").click(function () {
-          $("#fileInput").click();
-        });
-
-        $("#fileInput").change(function (event) {
-          var files = event.target.files;
-
-          if (files) {
-            for (var i = 0; i < files.length; i++) {
-              var reader = new FileReader();
-              reader.onload = function (e) {
-                var imageUrl = e.target.result;
-                var imageItem = $(
-                  '<div class="imageItem"><img src="' + imageUrl + '"></div>'
-                );
-                $("#imageContainer").append(imageItem);
-              };
-              reader.readAsDataURL(files[i]);
-            }
-          }
-        });
-
-        $("#imageModal").on("shown.bs.modal", function () {
-          cropper = new Cropper($("#modalImage")[0], {
-            aspectRatio: 16 / 9,
-            crop: function (event) {
-              console.log(event.detail.x);
-              console.log(event.detail.y);
-              console.log(event.detail.width);
-              console.log(event.detail.height);
-              console.log(event.detail.rotate);
-              console.log(event.detail.scaleX);
-              console.log(event.detail.scaleY);
-            },
-          });
-        });
-
-        $("#imageModal").on("hidden.bs.modal", function () {
-          cropper.destroy();
-          $("#modalImage").attr("src", ""); // Clear the src attribute of the modal image
-        });
-      });
-    </script>
   </body>
 </html>

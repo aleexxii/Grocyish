@@ -164,29 +164,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-// const signupForm = document.getElementById('signupForm');
-// const errorMessage = document.querySelector('.error-message');
-
-// signupForm.addEventListener('submit',async (event) => {
-//     event.preventDefault();
-
-//     const email = document.getElementById('formSignupEmail').value;
-
-//     try{
-//         const response = await fetch('/signup', {
-//             method : 'POST',
-//             body : JSON.stringify({email , firstname : '' , lastname : '' , password : ''}),
-//         })
-//         const data = await response.json();
-
-//         if (data.message){
-//             errorMessage.textContent = data.message;
-//         }else{
-//             window.location.href = '/login'
-//         }
-//     }catch(err){
-//         console.error(err);
-//         errorMessage.textContent = 'An error occurred. Please try again'
-//     }
-// })

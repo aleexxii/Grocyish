@@ -35,7 +35,7 @@ document.getElementById('addCategorybtn').addEventListener('click',()=>{
 
         if (fileInput.files.length > 0) {
             formData.append('file', fileInput.files[0]);
-              }
+        }
         fetch("/admin/add-category", {
             method: "POST",
             body: formData

@@ -30,7 +30,7 @@ document.getElementById("createProduct").addEventListener("click", async () => {
   
     const weight_error = document.getElementById('weight_error')
     weight_error.innerHTML = ''
-    const weight_regex = /^[0-9]+(\.[0-9]+)?\s*(kg|g|lbs)?$/i;
+    const weight_regex = /^[1-9][0-9]+(\.[0-9]+)?\s*(kg|g|lbs)?$/i;
   
     if(!weight_regex.test(weight) || weight < 0){
       weight_error.innerHTML = 'Please enter a valid weight'
@@ -104,12 +104,6 @@ function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
 
       console.log(imageFile , 'image file getting array');
 
-
-
-      // Check if a file is selected
-    //   if (fileInput.files.length > 0) {
-    //       imageFile = fileInput.files[0];
-    //   }
       try {
         // Create FormData object to send to backend
         const formData = new FormData();
@@ -127,8 +121,7 @@ function b64toBlob(b64Data, contentType = '', sliceSize = 512) {
         for (let i = 0; i < imageFile.length; i++) {
             formData.append('files', imageFile[i]);
         }
-console.log([...formData.entries()],'ith form data');
-console.log(imageFile,'ith image data');
+
         // Send form data to backend
         const response = await fetch("/admin/addNewProduct", {
             method: "POST",

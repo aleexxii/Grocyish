@@ -2,6 +2,7 @@ const Admin = require("../model/adminLoginModel");
 const Product = require("../model/productmodel");
 const Category = require("../model/categoryModel");
 const User = require("../model/model");
+const { isArray } = require("lodash");
 
 const getProducts = async (req, res) => {
   try {
@@ -26,7 +27,7 @@ const getProducts = async (req, res) => {
       ],
     })
       .limit(limit)
-      .skip((page - 1) * limit)
+      .skip((page - 1) * limit)   // page = 1 - 1 * 10 = 0 , first page skip = 0 , second page skip the first 10 products
       .exec();
 
     const totalProductCount = await Product.find({
@@ -52,7 +53,8 @@ const getProducts = async (req, res) => {
       totalPages: Math.ceil(totalProductCount / limit),
       currentPage: page,
       previous: page > 1 ?  page - 1 : null,
-      next: page < Math.ceil( totalProductCount / limit ) ? page + 1 : null,limit 
+      next: page < Math.ceil( totalProductCount / limit ) ? page + 1 : null,
+      limit 
     });
   } catch (error) {
     console.log(error);
@@ -78,8 +80,8 @@ const getAddProduct = async (req, res) => {
 
 const postCreateProduct = async (req, res) => {
   try {
-    console.log("Request body:", req.body);
-    console.log("Uploaded files:", req.file);
+    // console.log("Request body:", req.body);
+    // console.log("Uploaded files:", req.file);
 
     // Destructure required fields from req.body
     const {
@@ -97,7 +99,7 @@ const postCreateProduct = async (req, res) => {
 
     // Extract filenames from uploaded files
     const images = req.files.map((file) => file.filename);
-    console.log(images, "image name");
+    // console.log(images, "image name");
 
     // Create a new Product instance
     const newProduct = new Product({
@@ -115,7 +117,7 @@ const postCreateProduct = async (req, res) => {
       // description: description,
       image: images, // Save image filenames
     });
-    console.log(newProduct, "ithane new oriduct");
+    // console.log(newProduct, "ithane new oriduct");
     // Save the new product to the database
     await newProduct.save();
 
@@ -133,7 +135,7 @@ const postCreateProduct = async (req, res) => {
 const editProduct = async (req, res) => {
   try {
     const product_Id = req.query.productId;
-    console.log("this is product id -> ", product_Id);
+    // console.log("this is product id -> ", product_Id);
 
     const productEditingPage = await Product.findById(product_Id);
 
@@ -155,8 +157,7 @@ const editProduct = async (req, res) => {
 const updatedproductPage = async (req, res) => {
   try {
     const updatedQueryId = req.query.productId;
-    console.log("update cheyyan ulla id", updatedQueryId);
-    console.log(req.body, "edit product body");
+    // console.log(req.files,'from the files');
     const {
       productName,
       category,
@@ -172,12 +173,25 @@ const updatedproductPage = async (req, res) => {
       description,
     } = req.body;
 
-    console.log("how many fies getting from the req.files", req.files);
+    const existingProduct = await Product.findOne({deletedAt : 'Not-Deleted', productName , _id : {$ne : updatedQueryId}})
 
+    // console.log(existingProduct , '<-------existingProduct');
+
+    if(existingProduct){
+      return res.status(200).json({existingError : 'Product already exists'})
+    }
+
+
+// Extract existing and new filenames from FormData
+// console.log(req.body.existingImages , '<-----req.body.existingImages');
+const existingImages = Array.isArray(req.body.existingImages) ? req.body.existingImages : [];
+const newImages = req.files ? req.files.map((file) => file.filename) : [];
+
+// Combine existing and new images
+const images = [...new Set([...existingImages, ...newImages])];
+// console.log(images);
     // Extract filenames from uploaded files
-    const images = req.files.map((file) => file.filename);
-    console.log(images, "image name");
-
+    // const images = req.files.map((file) => file.filename);
     // Update the product instance
     const updatedProduct = await Product.findByIdAndUpdate(
       updatedQueryId,
@@ -223,7 +237,7 @@ const deletedproductPage = async (req, res) => {
 
 const deletingProduct = async (req, res) => {
   const produceId = req.query.productId;
-  console.log("product id for deleting ->", produceId);
+  // console.log("product id for deleting ->", produceId);
   await Product.findByIdAndUpdate(
     produceId,
     { deletedAt: "Deleted" },

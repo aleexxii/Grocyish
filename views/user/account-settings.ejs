@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
    
-<!-- Mirrored from freshcart.codescandy.com/pages/account-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:52 GMT -->
+<!-- Mirrored from freshcart.codescandy.com/pages/account-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:52 GMT -->
 <head>
       <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta content="Codescandy" name="author">
-      <title>Orders eCommerce HTML Template - FreshCart</title>
+      <title>Settings eCommerce HTML Template - FreshCart</title>
       <!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon" href="../images/favicon/favicon.ico">
 
@@ -257,53 +257,13 @@
 			</div>
 		</div>
 	</div>
-
-	<nav class="navbar navbar-expand-lg navbar-light navbar-default py-0 pb-lg-4" aria-label="Offcanvas navbar large">
-		<div class="container">
-			<div class="offcanvas offcanvas-start" tabindex="-1" id="navbar-default" aria-labelledby="navbar-defaultLabel">
-				<div class="offcanvas-header pb-1">
-					<a href="index.html"><img src="../images/logo/freshcart-logo.svg" alt="eCommerce HTML Template" /></a>
-					<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-				</div>
-				<div class="offcanvas-body">
-					<div class="d-block d-lg-none mb-4">
-						<form action="#">
-							<div class="input-group">
-								<input class="form-control rounded" type="search" placeholder="Search for products" />
-								<span class="input-group-append">
-									<button class="btn bg-white border border-start-0 ms-n10 rounded-0 rounded-end" type="button">
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											width="16"
-											height="16"
-											viewBox="0 0 24 24"
-											fill="none"
-											stroke="currentColor"
-											stroke-width="2"
-											stroke-linecap="round"
-											stroke-linejoin="round"
-											class="feather feather-search"
-										>
-											<circle cx="11" cy="11" r="8"></circle>
-											<line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-										</svg>
-									</button>
-								</span>
-							</div>
-						</form>
-						<div class="mt-2">
-							<button type="button" class="btn btn-outline-gray-400 text-muted w-100" data-bs-toggle="modal" data-bs-target="#locationModal">
-								<i class="feather-icon icon-map-pin me-2"></i>
-								Pick Location
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
 </div>
-<!-- Modal -->
+
+
+
+
+
+<!-- Login Modal -->
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content p-4">
@@ -668,7 +628,7 @@
 	</div>
 </div>
 
-<!-- Modal -->
+<!-- Location Modal -->
 <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm modal-dialog-centered">
 		<div class="modal-content">
@@ -743,6 +703,7 @@
       <main>
          <!-- section -->
          <section>
+            <!-- container -->
             <div class="container">
                <!-- row -->
                <div class="row">
@@ -765,18 +726,17 @@
                   <!-- col -->
                   <div class="col-lg-3 col-md-4 col-12 border-end d-none d-md-block">
                      <div class="pt-10 pe-lg-10">
-                        <!-- nav -->
+                        <!-- nav item -->
                         <ul class="nav flex-column nav-pills nav-pills-dark">
-                           <!-- nav item -->
                            <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="account-orders.html">
+                              <a class="nav-link" aria-current="page" href="/account-orders">
                                  <i class="feather-icon icon-shopping-bag me-2"></i>
                                  Your Orders
                               </a>
                            </li>
                            <!-- nav item -->
                            <li class="nav-item">
-                              <a class="nav-link" href="./account-settings">
+                              <a class="nav-link active" href="/account-settings">
                                  <i class="feather-icon icon-settings me-2"></i>
                                  Settings
                               </a>
@@ -808,7 +768,7 @@
                            </li>
                            <!-- nav item -->
                            <li class="nav-item">
-                              <a class="nav-link" href="/logout">
+                              <a class="nav-link" href="../index.html">
                                  <i class="feather-icon icon-log-out me-2"></i>
                                  Log out
                               </a>
@@ -818,55 +778,84 @@
                   </div>
                   <div class="col-lg-9 col-md-8 col-12">
                      <div class="py-6 p-md-6 p-lg-10">
-                        <!-- heading -->
-                        <h2 class="mb-6">Your Orders</h2>
+                        <div class="mb-6">
+                           <!-- heading -->
+                           <h2 class="mb-0">Account Setting</h2>
+                        </div>
+                        <div>
+                           <!-- heading -->
+                           <h5 class="mb-4">Account details</h5>
+                           <div class="row">
+                              <div class="col-lg-5">
 
-                        <div class="table-responsive-xxl border-0">
-                           <!-- Table -->
-                           <table class="table mb-0 text-nowrap table-centered">
-                              <!-- Table Head -->
-                              <thead class="bg-light">
-                                 <tr>
-                                    <th>&nbsp;</th>
-                                    <th>Product</th>
-                                    <th>Order</th>
-                                    <th>Date</th>
-                                    <th>Items</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
+                                 <!-- form -->
+                                 <form>
+                                     <!-- input -->
+                                     <div class="mb-3">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstname" name="firstname" oninput="namevalidation()" value=<%- user.fname %> />
+										<div class="text-danger" id="fnameError"></div>
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastname" name="lastname" value="<%- user.lname %>" />
+                                     </div>
+                                     <!-- input --> 
+                                     <div class="mb-3">
+                                       <label class="form-label">Email</label>
+                                       <input type="email" class="form-control" id="editEmail" name="email" oninput="emailValidation()" value="<%- user.email %>" />
+									   <span class="text-danger" id="emailErrorMsg"></span>
+                                    </div>
+                                    <!-- input -->
+                                    <!-- <div class="mb-5">
+                                       <label class="form-label">Phone</label>
+                                       <input type="text" class="form-control" id="phone" name="phone" placeholder="Phone number" />
+                                    </div> -->
+                                    <!-- button -->
+                                    <div class="mb-3">
+                                       <button id="saveAdrress" class="btn btn-primary">Save Details</button>
+                                    </div>
+                                    <div id="feedbackMessage"></div>
+                                 </form>
 
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <!-- Table body -->
 
-                                 <tr>
-                                    <td class="align-middle border-top-0 w-0">
-                                       <a href="#"><img src="../images/products/product-img-1.jpg" alt="Ecommerce" class="icon-shape icon-xl" /></a>
-                                    </td>
-                                    <td class="align-middle border-top-0">
-                                       <a href="#" class="fw-semibold text-inherit">
-                                          <h6 class="mb-0">Haldiram's Nagpur Aloo Bhujia</h6>
-                                       </a>
-                                       <span><small class="text-muted">400g</small></span>
-                                    </td>
-                                    <td class="align-middle border-top-0">
-                                       <a href="#" class="text-inherit">#14899</a>
-                                    </td>
-                                    <td class="align-middle border-top-0">March 5, 2023</td>
-                                    <td class="align-middle border-top-0">1</td>
-                                    <td class="align-middle border-top-0">
-                                       <span class="badge bg-warning">Processing</span>
-                                    </td>
-                                    <td class="align-middle border-top-0">$15.00</td>
-                                    <td class="text-muted align-middle border-top-0">
-                                       <a href="#" class="text-inherit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View"><i class="feather-icon icon-eye"></i></a>
-                                    </td>
-                                 </tr>
-                                 
-                              </tbody>
-                           </table>
+                              </div>
+                           </div>
+                        </div>
+                        <hr class="my-10" />
+                        <div class="pe-lg-14">
+                           <!-- heading -->
+                           <h5 class="mb-4">Password</h5>
+                           <form class="row row-cols-1 row-cols-lg-2">
+                              <!-- input -->
+                              <div class="mb-3 col">
+                                 <label class="form-label">New Password</label>
+								 <div class="text-danger" id="passwordMessage"></div>
+                                 <input type="password" class="form-control" id="newPassword" oninput="passwordValidation()" placeholder="**********" />
+                              </div>
+                              <!-- input -->
+                              <div class="mb-3 col">
+                                 <label class="form-label">Current Password</label>
+								 <span class="text-danger" id="currentPasswordError"></span>
+                                 <input type="password" class="form-control" id="currentPassword" placeholder="**********" />
+                              </div>
+                              <!-- input -->
+                              <div class="col-12">
+                                 <p class="mb-4">
+                                    Can’t remember your current password?
+                                    <a href="/forgot-password">Reset your password.</a>
+                                 </p>
+                                 <button type="submit" id="forgetPassword" class="btn btn-primary">Save Password</button>
+								 <span class="text-success" id="successMessage"></span>
+                              </div>
+                           </form>
+                        </div>
+                        <hr class="my-10" />
+                        <div>
+                           <!-- heading -->
+                           <h5 class="mb-4">Delete Account</h5>
+                           <p class="mb-2">Would you like to delete your account?</p>
+                           <p class="mb-5">This account contain 12 orders, Deleting your account will remove all the order details associated with it.</p>
+                           <!-- btn -->
+                           <a href="#" class="btn btn-outline-danger">I want to delete my account</a>
                         </div>
                      </div>
                   </div>
@@ -876,7 +865,6 @@
       </main>
 
       <!-- modal -->
-
       <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
          <!-- offcanvas header -->
          <div class="offcanvas-header">
@@ -888,19 +876,21 @@
             <ul class="nav flex-column nav-pills nav-pills-dark">
                <!-- nav item -->
                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/account-orders">
+                  <a class="nav-link" aria-current="page" href="./account-orders">
                      <i class="feather-icon icon-shopping-bag me-2"></i>
                      Your Orders
                   </a>
                </li>
                <!-- nav item -->
+
                <li class="nav-item">
-                  <a class="nav-link" href="/account-settings">
+                  <a class="nav-link active" href="account-settings.html">
                      <i class="feather-icon icon-settings me-2"></i>
                      Settings
                   </a>
                </li>
                <!-- nav item -->
+
                <li class="nav-item">
                   <a class="nav-link" href="/account-address">
                      <i class="feather-icon icon-map-pin me-2"></i>
@@ -908,6 +898,7 @@
                   </a>
                </li>
                <!-- nav item -->
+
                <li class="nav-item">
                   <a class="nav-link" href="account-payment-method.html">
                      <i class="feather-icon icon-credit-card me-2"></i>
@@ -915,6 +906,7 @@
                   </a>
                </li>
                <!-- nav item -->
+
                <li class="nav-item">
                   <a class="nav-link" href="account-notification.html">
                      <i class="feather-icon icon-bell me-2"></i>
@@ -924,7 +916,7 @@
             </ul>
             <hr class="my-6" />
             <div>
-               <!-- nav  -->
+               <!-- navs -->
                <ul class="nav flex-column nav-pills nav-pills-dark">
                   <!-- nav item -->
                   <li class="nav-item">
@@ -1095,6 +1087,7 @@
   </div>
 </footer>
       <!-- Javascript-->
+      <script src="../../user/assets/js/accountSettings.js"></script>
       <!-- Libs JS -->
 <!-- <script src="../libs/jquery/dist/jquery.min.js"></script> -->
 <script src="../libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -1105,5 +1098,5 @@
 
    </body>
 
-<!-- Mirrored from freshcart.codescandy.com/pages/account-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:52 GMT -->
+<!-- Mirrored from freshcart.codescandy.com/pages/account-settings.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:52 GMT -->
 </html>

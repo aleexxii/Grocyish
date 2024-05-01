@@ -1,8 +1,6 @@
 const express = require('express');
-
-
-
 const route = express();
+
 
 const adminController = require('../controller/adminController');
 const adminCategory = require('../controller/adminCategory')
@@ -10,7 +8,6 @@ const adminProduct = require('../controller/adminProduct')
 const adminCustomerdetails = require('../controller/adminCustomer')
 const productImageMulter = require('../../middleware/productImageMulter')
 const categoryImageMulter = require('../../middleware/categoryImages')
-
 
 // Set views directory
 route.set('views', './views/admin');
@@ -26,7 +23,7 @@ route.get('/categories',adminCategory.getCategories)
 route.get('/add-category',adminCategory.getAddCategories)
 route.post('/add-category',categoryImageMulter.single('file'),adminCategory.postAddCategory)
 route.get('/edit-category', adminCategory.editCategoryPage);
-route.post('/edit-category',adminCategory.editedCategory)
+route.post('/edit-category',categoryImageMulter.single('file'),adminCategory.editedCategory)
 route.get('/category-deleted',adminCategory.categoryDeleting)
 route.get('/deleted-category',adminCategory.deletedCategory)
 
@@ -53,10 +50,5 @@ route.get('/product-deleted',adminProduct.deletingProduct)
 route.get('/vendor',adminController.getVendor)
 route.get('/reviews',adminController.getReviews)
 
-
-// Assuming you are using Express.js
-
-
-// route.post('/soft-delete-category', adminController.softDeleteCategory);
 
 module.exports = route

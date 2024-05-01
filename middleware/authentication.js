@@ -36,9 +36,9 @@ const verifyJWT = (req, res, next) => {
 
   const isBlocked = async ( req,res,next ) => {
     const userid = req.user.userId
-    console.log('<----userid for blocking' , req.user);
+    // console.log('<----userid for blocking' , req.user);
     const user = await userModel.findById(userid)
-    console.log(user);
+    // console.log(user);
     if(user.status == 'Blocked'){
       res.redirect('/login')
     }else {

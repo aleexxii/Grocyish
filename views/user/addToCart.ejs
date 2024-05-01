@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-   
-<!-- Mirrored from freshcart.codescandy.com/pages/account-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:52 GMT -->
+	
+<!-- Mirrored from freshcart.codescandy.com/pages/shop-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:43 GMT -->
 <head>
-      <!-- Required meta tags -->
+		<!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta content="Codescandy" name="author">
-      <title>Orders eCommerce HTML Template - FreshCart</title>
-      <!-- Favicon icon-->
+		<title>Shop Cart eCommerce HTML Template - FreshCart</title>
+		<!-- Favicon icon-->
 <link rel="shortcut icon" type="image/x-icon" href="../images/favicon/favicon.ico">
 
 
@@ -45,10 +45,10 @@
    })(window, document, "clarity", "script", "kuc8w5o9nt");
 </script>
 
-   </head>
+	</head>
 
-   <body>
-      <!-- navbar -->
+	<body>
+		<!-- navbar -->
 <div class="border-bottom">
 	<div class="bg-light py-1">
 		<div class="container">
@@ -740,206 +740,198 @@
 
 <script src="../js/vendors/validation.js"></script>
 
-      <main>
-         <!-- section -->
-         <section>
-            <div class="container">
-               <!-- row -->
-               <div class="row">
-                  <!-- col -->
-                  <div class="col-12">
-                     <div class="d-flex justify-content-between align-items-center d-md-none py-4">
-                        <!-- heading -->
-                        <h3 class="fs-5 mb-0">Account Setting</h3>
-                        <!-- button -->
-                        <button
-                           class="btn btn-outline-gray-400 text-muted d-md-none btn-icon btn-sm ms-3"
-                           type="button"
-                           data-bs-toggle="offcanvas"
-                           data-bs-target="#offcanvasAccount"
-                           aria-controls="offcanvasAccount">
-                           <i class="bi bi-text-indent-left fs-3"></i>
-                        </button>
-                     </div>
-                  </div>
-                  <!-- col -->
-                  <div class="col-lg-3 col-md-4 col-12 border-end d-none d-md-block">
-                     <div class="pt-10 pe-lg-10">
-                        <!-- nav -->
-                        <ul class="nav flex-column nav-pills nav-pills-dark">
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <a class="nav-link active" aria-current="page" href="account-orders.html">
-                                 <i class="feather-icon icon-shopping-bag me-2"></i>
-                                 Your Orders
-                              </a>
-                           </li>
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <a class="nav-link" href="./account-settings">
-                                 <i class="feather-icon icon-settings me-2"></i>
-                                 Settings
-                              </a>
-                           </li>
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <a class="nav-link" href="/account-address">
-                                 <i class="feather-icon icon-map-pin me-2"></i>
-                                 Address
-                              </a>
-                           </li>
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <a class="nav-link" href="account-payment-method.html">
-                                 <i class="feather-icon icon-credit-card me-2"></i>
-                                 Payment Method
-                              </a>
-                           </li>
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <a class="nav-link" href="account-notification.html">
-                                 <i class="feather-icon icon-bell me-2"></i>
-                                 Notification
-                              </a>
-                           </li>
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <hr />
-                           </li>
-                           <!-- nav item -->
-                           <li class="nav-item">
-                              <a class="nav-link" href="/logout">
-                                 <i class="feather-icon icon-log-out me-2"></i>
-                                 Log out
-                              </a>
-                           </li>
-                        </ul>
-                     </div>
-                  </div>
-                  <div class="col-lg-9 col-md-8 col-12">
-                     <div class="py-6 p-md-6 p-lg-10">
-                        <!-- heading -->
-                        <h2 class="mb-6">Your Orders</h2>
+		<main>
+			<!-- section-->
+			<div class="mt-4">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- col -->
+						<div class="col-12">
+							<!-- breadcrumb -->
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb mb-0">
+									<li class="breadcrumb-item"><a href="#!">Home</a></li>
+									<li class="breadcrumb-item"><a href="#!">Shop</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Shop Cart</li>
+								</ol>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section -->
+			<section class="mb-lg-14 mb-8 mt-8">
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<div class="col-12">
+							<!-- card -->
+							<div class="card py-1 border-0 mb-8">
+								<div>
+									<h1 class="fw-bold">Shop Cart</h1>
+									<p class="mb-0">Shopping in 382480</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- row -->
+					<div class="row">
+						<div class="col-lg-8 col-md-7">
+							<div class="py-3">
+								<!-- alert -->
+								<div class="alert alert-danger p-2" role="alert">
+									You’ve got FREE delivery. Start
+									<a href="#!" class="alert-link">checkout now!</a>
+								</div>
+								<ul class="list-group list-group-flush">
+									<!-- list group -->
+									
+									<li class="list-group-item py-3 ps-0 border-top">
+										<!-- row -->
+										<% cart.forEach(product => { %>
+											<div class="row align-items-center">
+												<div class="col-6 col-md-6 col-lg-7">
+													<div class="d-flex">
+														<img src="../images/products/product-img-1.jpg" alt="Ecommerce" class="icon-shape icon-xxl" />
+														<div class="ms-3">
+															<!-- title -->
+															<a href="shop-single.html" class="text-inherit">
+																<h6 class="mb-0">Haldiram's Sev Bhujia</h6>
+															</a>
+															<span><small class="text-muted">.98 / lb</small></span>
+															<!-- text -->
+															<div class="mt-2 small lh-1">
+																<a href="#!" class="text-decoration-none text-inherit">
+																	<span class="me-1 align-text-bottom">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			width="14"
+																			height="14"
+																			viewBox="0 0 24 24"
+																			fill="none"
+																			stroke="currentColor"
+																			stroke-width="2"
+																			stroke-linecap="round"
+																			stroke-linejoin="round"
+																			class="feather feather-trash-2 text-success"
+																		>
+																			<polyline points="3 6 5 6 21 6"></polyline>
+																			<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+																			<line x1="10" y1="11" x2="10" y2="17"></line>
+																			<line x1="14" y1="11" x2="14" y2="17"></line>
+																		</svg>
+																	</span>
+																	<span class="text-muted">Remove</span>
+																</a>
+															</div>
+														</div>
+													</div>
+												</div>
+												<!-- input group -->
+												<div class="col-4 col-md-4 col-lg-3">
+													<!-- input -->
+													<!-- input -->
+													<div class="input-group input-spinner">
+														<input type="button" value="-" class="button-minus btn btn-sm" data-field="quantity" />
+														<input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field form-control-sm form-input" />
+														<input type="button" value="+" class="button-plus btn btn-sm" data-field="quantity" />
+													</div>
+												</div>
+												<!-- price -->
+												<div class="col-2 text-lg-end text-start text-md-end col-md-2">
+													<span class="fw-bold"><%- product.quantity %> $5.00</span>
+												</div>
+											</div>
+										<% }) %>
+										
+									</li>
+									<!-- list group -->
+									
+								</ul>
+								<!-- btn -->
+								<div class="d-flex justify-content-between mt-4">
+									<a href="#!" class="btn btn-primary">Continue Shopping</a>
+									<a href="#!" class="btn btn-dark">Update Cart</a>
+								</div>
+							</div>
+						</div>
 
-                        <div class="table-responsive-xxl border-0">
-                           <!-- Table -->
-                           <table class="table mb-0 text-nowrap table-centered">
-                              <!-- Table Head -->
-                              <thead class="bg-light">
-                                 <tr>
-                                    <th>&nbsp;</th>
-                                    <th>Product</th>
-                                    <th>Order</th>
-                                    <th>Date</th>
-                                    <th>Items</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
+						<!-- sidebar -->
+						<div class="col-12 col-lg-4 col-md-5">
+							<!-- card -->
+							<div class="mb-5 card mt-6">
+								<div class="card-body p-6">
+									<!-- heading -->
+									<h2 class="h5 mb-4">Summary</h2>
+									<div class="card mb-2">
+										<!-- list group -->
+										<ul class="list-group list-group-flush">
+											<!-- list group item -->
+											<li class="list-group-item d-flex justify-content-between align-items-start">
+												<div class="me-auto">
+													<div>Item Subtotal</div>
+												</div>
+												<span>$70.00</span>
+											</li>
 
-                                    <th></th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <!-- Table body -->
+											<!-- list group item -->
+											<li class="list-group-item d-flex justify-content-between align-items-start">
+												<div class="me-auto">
+													<div>Service Fee</div>
+												</div>
+												<span>$3.00</span>
+											</li>
+											<!-- list group item -->
+											<li class="list-group-item d-flex justify-content-between align-items-start">
+												<div class="me-auto">
+													<div class="fw-bold">Subtotal</div>
+												</div>
+												<span class="fw-bold">$67.00</span>
+											</li>
+										</ul>
+									</div>
+									<div class="d-grid mb-1 mt-4">
+										<!-- btn -->
+										<button class="btn btn-primary btn-lg d-flex justify-content-between align-items-center" type="submit">
+											Go to Checkout
+											<span class="fw-bold">$67.00</span>
+										</button>
+									</div>
+									<!-- text -->
+									<p>
+										<small>
+											By placing your order, you agree to be bound by the Freshcart
+											<a href="#!">Terms of Service</a>
+											and
+											<a href="#!">Privacy Policy.</a>
+										</small>
+									</p>
 
-                                 <tr>
-                                    <td class="align-middle border-top-0 w-0">
-                                       <a href="#"><img src="../images/products/product-img-1.jpg" alt="Ecommerce" class="icon-shape icon-xl" /></a>
-                                    </td>
-                                    <td class="align-middle border-top-0">
-                                       <a href="#" class="fw-semibold text-inherit">
-                                          <h6 class="mb-0">Haldiram's Nagpur Aloo Bhujia</h6>
-                                       </a>
-                                       <span><small class="text-muted">400g</small></span>
-                                    </td>
-                                    <td class="align-middle border-top-0">
-                                       <a href="#" class="text-inherit">#14899</a>
-                                    </td>
-                                    <td class="align-middle border-top-0">March 5, 2023</td>
-                                    <td class="align-middle border-top-0">1</td>
-                                    <td class="align-middle border-top-0">
-                                       <span class="badge bg-warning">Processing</span>
-                                    </td>
-                                    <td class="align-middle border-top-0">$15.00</td>
-                                    <td class="text-muted align-middle border-top-0">
-                                       <a href="#" class="text-inherit" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View"><i class="feather-icon icon-eye"></i></a>
-                                    </td>
-                                 </tr>
-                                 
-                              </tbody>
-                           </table>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
-      </main>
+									<!-- heading -->
+									<div class="mt-8">
+										<h2 class="h5 mb-3">Add Promo or Gift Card</h2>
+										<form>
+											<div class="mb-2">
+												<!-- input -->
+												<label for="giftcard" class="form-label sr-only">Email address</label>
+												<input type="text" class="form-control" id="giftcard" placeholder="Promo or Gift Card" />
+											</div>
+											<!-- btn -->
+											<div class="d-grid"><button type="submit" class="btn btn-outline-dark mb-1">Redeem</button></div>
+											<p class="text-muted mb-0"><small>Terms & Conditions apply</small></p>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
 
-      <!-- modal -->
-
-      <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasAccount" aria-labelledby="offcanvasAccountLabel">
-         <!-- offcanvas header -->
-         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasAccountLabel">Offcanvas</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-         </div>
-         <!-- offcanvas body -->
-         <div class="offcanvas-body">
-            <ul class="nav flex-column nav-pills nav-pills-dark">
-               <!-- nav item -->
-               <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/account-orders">
-                     <i class="feather-icon icon-shopping-bag me-2"></i>
-                     Your Orders
-                  </a>
-               </li>
-               <!-- nav item -->
-               <li class="nav-item">
-                  <a class="nav-link" href="/account-settings">
-                     <i class="feather-icon icon-settings me-2"></i>
-                     Settings
-                  </a>
-               </li>
-               <!-- nav item -->
-               <li class="nav-item">
-                  <a class="nav-link" href="/account-address">
-                     <i class="feather-icon icon-map-pin me-2"></i>
-                     Address
-                  </a>
-               </li>
-               <!-- nav item -->
-               <li class="nav-item">
-                  <a class="nav-link" href="account-payment-method.html">
-                     <i class="feather-icon icon-credit-card me-2"></i>
-                     Payment Method
-                  </a>
-               </li>
-               <!-- nav item -->
-               <li class="nav-item">
-                  <a class="nav-link" href="account-notification.html">
-                     <i class="feather-icon icon-bell me-2"></i>
-                     Notification
-                  </a>
-               </li>
-            </ul>
-            <hr class="my-6" />
-            <div>
-               <!-- nav  -->
-               <ul class="nav flex-column nav-pills nav-pills-dark">
-                  <!-- nav item -->
-                  <li class="nav-item">
-                     <a class="nav-link" href="../index.html">
-                        <i class="feather-icon icon-log-out me-2"></i>
-                        Log out
-                     </a>
-                  </li>
-               </ul>
-            </div>
-         </div>
-      </div>
-
-      <!-- Footer -->
-      <!-- footer -->
+		<!-- Footer -->
+		<!-- footer -->
 <footer class="footer">
   <div class="container">
     <div class="row g-4 py-4">
@@ -1094,8 +1086,8 @@
     </div>
   </div>
 </footer>
-      <!-- Javascript-->
-      <!-- Libs JS -->
+		<!-- Javascript-->
+		<!-- Libs JS -->
 <!-- <script src="../libs/jquery/dist/jquery.min.js"></script> -->
 <script src="../libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../libs/simplebar/dist/simplebar.min.js"></script>
@@ -1103,7 +1095,7 @@
 <!-- Theme JS -->
 <script src="../js/theme.min.js"></script>
 
-   </body>
+	</body>
 
-<!-- Mirrored from freshcart.codescandy.com/pages/account-orders.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:52 GMT -->
+<!-- Mirrored from freshcart.codescandy.com/pages/shop-cart.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Mar 2024 09:07:43 GMT -->
 </html>
