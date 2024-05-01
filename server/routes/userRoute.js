@@ -52,6 +52,7 @@ route.post('/account-forgetPassword',verifyJWT,isBlocked,accountSettings.postAcc
 route.get('/account-address',verifyJWT,isBlocked,accountAddress.getAddress)
 route.post('/account-address',verifyJWT,isBlocked,accountAddress.postAddress)
 route.delete('/delete-address/:addressId',verifyJWT,isBlocked,accountAddress.deleteAddress)
+route.post('/edit-address/:addressId',verifyJWT,isBlocked,accountAddress.postEditAddress)
 
 module.exports = route
 

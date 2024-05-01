@@ -11,7 +11,7 @@ document.querySelectorAll('.addToCartBtn').forEach(btn =>{
                 headers : {
                     'Content-Type' : 'application/json'
                 },
-                body : JSON.stringify({productId})
+                body : JSON.stringify(productId)
             })
             if (!response.ok) {
                 throw new Error(`HTTP error ${response.status}`);

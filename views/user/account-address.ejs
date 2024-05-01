@@ -133,11 +133,11 @@
 		<div class="container">
 			<div class="row w-100 align-items-center gx-lg-2 gx-0">
 				<div class="col-xxl-2 col-lg-3 col-md-6 col-5">
-					<a class="navbar-brand d-none d-lg-block" href="../index.html">
+					<a class="navbar-brand d-none d-lg-block" href="/home">
 						<img src="../images/logo/freshcart-logo.svg" alt="eCommerce HTML Template" />
 					</a>
 					<div class="d-flex justify-content-between w-100 d-lg-none">
-						<a class="navbar-brand" href="../index.html">
+						<a class="navbar-brand" href="/home">
 							<img src="../images/logo/freshcart-logo.svg" alt="eCommerce HTML Template" />
 						</a>
 					</div>
@@ -380,7 +380,7 @@
 							<li class="nav-item dropdown w-100 w-lg-auto">
 								<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Home</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="../index.html">Home 1</a></li>
+									<li><a class="dropdown-item" href="/home">Home 1</a></li>
 									<li><a class="dropdown-item" href="index-2.html">Home 2</a></li>
 									<li><a class="dropdown-item" href="index-3.html">Home 3</a></li>
 									<li><a class="dropdown-item" href="index-4.html">Home 4</a></li>
@@ -540,8 +540,8 @@
 	</nav> -->
 
 </div>
-<!-- Modal -->
-<div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
+<!-- Modal for sign up -->
+<!-- <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered">
 		<div class="modal-content p-4">
 			<div class="modal-header border-0">
@@ -582,7 +582,7 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 <!-- Shop Cart -->
 
@@ -1048,7 +1048,7 @@
 									</li>
 									<!-- nav item -->
 									<li class="nav-item">
-										<a class="nav-link" href="../index.html">
+										<a class="nav-link" href="/home">
 											<i class="feather-icon icon-log-out me-2"></i>
 											Log out
 										</a>
@@ -1103,7 +1103,8 @@
 													<a href="#" class="btn btn-info btn-sm">Default address</a>
 													<div class="mt-4">
 														<input value="<%- user._id %>" hidden>
-														<a href="#" class="text-inherit" data-bs-toggle="modal" data-bs-target="#editAddressModal">Edit</a>
+														<% const userAddress = JSON.stringify(user) %>
+														<a href="#" class="text-inherit" data-custom-data="<%= userAddress %>" data-bs-toggle="modal" data-bs-target="#editAddressModal">Edit</a>
 														
 														<% const addressObj = JSON.stringify(user) %>
 														<a href="" class="deleteAddressBtn text-danger ms-3" data-custom-data="<%= addressObj %>"  data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</a>
@@ -1192,22 +1193,26 @@
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" class="form-control" id="firstname" placeholder="First name" aria-label="First name" required="" />
+								<input type="text" class="form-control" id="firstname" oninput="namevalidation()" placeholder="First name" aria-label="First name" required="" />
+								<span id="firstnameError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" class="form-control" id="lastname" placeholder="Last name" aria-label="Last name" required="" />
+								<input type="text" class="form-control" id="lastname" oninput="lastnameValidation()" placeholder="Last name" aria-label="Last name" required="" />
+								<span id="lastnameError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="number" class="form-control" id="phone" placeholder="Phone no." />
+								<input type="number" class="form-control" id="phone" oninput="phoneNumberValidation()" placeholder="Phone no." />
+								<span id="phoneNumberError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" class="form-control" id="address" placeholder="Address" />
+								<input type="text" class="form-control" id="address" oninput="addressValidation()" placeholder="Address" />
+								<span id="addressError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
@@ -1232,17 +1237,20 @@
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" id="city" class="form-control" placeholder="City" />
+								<input type="text" id="city" class="form-control" oninput="cityValidation()" placeholder="City" />
+								<span id="cityError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" id="pincode" class="form-control" placeholder="pin Code" />
+								<input type="text" id="pincode" oninput="pincodeValidation()" class="form-control" placeholder="pin Code" />
+								<span id="pincodeError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" id="landmark" class="form-control" placeholder="Landmark" />
+								<input type="text" id="landmark" class="form-control" oninput="landmarkValidation()" placeholder="Landmark" />
+								<span id="landmarkError" class="text-danger"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
@@ -1257,6 +1265,7 @@
 								<button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
 								<button id="saveBtn" class="btn btn-primary" type="button">Save Address</button>
 							</div>
+							<span id="returnError" class="text-danger"></span>
 							<span id="addressmsg" class="text-success"></span>
 						</div>
 					</div>
@@ -1276,8 +1285,9 @@
 						<div class="d-flex justify-content-between mb-5">
 							<div>
 								<!-- heading -->
-								<h5 class="mb-1" id="addAddressModalLabel">New Shipping Address</h5>
-								<p class="small mb-0">Add new shipping address for your order delivery.</p>
+								<h4 id="editSuccessMsg" class="text-success"></h4>
+								<h5 class="mb-1" id="addAddressModalLabel">Edit Shipping Address</h5>
+								<p class="small mb-0">Edit shipping address for your order delivery.</p>
 							</div>
 							<div>
 								<!-- button -->
@@ -1289,28 +1299,32 @@
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" class="form-control" id="firstname" placeholder="First name" aria-label="First name" required="" />
+								<input type="text" class="form-control" id="editFirstname" oninput="namevalidation()"  placeholder="First name" aria-label="First name" required="" />
+								<span class="text-danger" id="editfirstnameError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" class="form-control" id="lastname" placeholder="Last name" aria-label="Last name" required="" />
+								<input type="text" class="form-control" id="editLastname" oninput="lastnameValidation()"  placeholder="Last name" aria-label="Last name" required="" />
+								<span class="text-danger" id="editlastnameError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="number" class="form-control" id="phone" placeholder="Phone no." />
+								<input type="number" class="form-control" id="editPhone" oninput="phoneNumberValidation()"  placeholder="Phone no." />
+								<span class="text-danger" id="editphoneNumberError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" class="form-control" id="address" placeholder="Address" />
+								<input type="text" class="form-control" oninput="addressValidation()" id="editAddress"  placeholder="Address" />
+								<span class="text-danger" id="editaddressError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- form select -->
 								<select class="form-select">
-									<option selected="" id="state">Kerala</option>
+									<option selected="" id="editState">Kerala</option>
 									<option value="1">Tamilnadu</option>
 									<option value="2">Assam</option>
 									<option value="3">Bihar</option>
@@ -1320,7 +1334,7 @@
 							<div class="col-12">
 								<!-- form select -->
 								<select class="form-select">
-									<option selected="" id="district">Eranakulam</option>
+									<option selected="" id="editDistrict">Eranakulam</option>
 									<option value="1">Alappuzha</option>
 									<option value="2">Malappuram</option>
 									<option value="3">Kollam</option>
@@ -1329,17 +1343,20 @@
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" id="city" class="form-control" placeholder="City" />
+								<input type="text" id="editCity" oninput="cityValidation()" class="form-control" placeholder="City" />
+								<span class="text-danger" id="editcityError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" id="pincode" class="form-control" placeholder="pin Code" />
+								<input type="text" id="editPincode" oninput="pincodeValidation()" class="form-control" placeholder="pin Code" />
+								<span class="text-danger" id="editpincodeError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
 								<!-- input -->
-								<input type="text" id="landmark" class="form-control" placeholder="Landmark" />
+								<input type="text" id="editLandmark" oninput="landmarkValidation()" class="form-control" placeholder="Landmark" />
+								<span class="text-danger" id="editlandmarkError"></span>
 							</div>
 							<!-- col -->
 							<div class="col-12">
@@ -1352,8 +1369,10 @@
 							<!-- col -->
 							<div class="col-12 text-end">
 								<button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Cancel</button>
-								<button id="saveBtn" class="btn btn-primary" type="button">Save Address</button>
+								<input id="addressObjId" hidden>
+								<button id="saveEditedBtn" class="btn btn-primary" type="button">Save Address</button>
 							</div>
+							<span class="text-danger" id="editreturnError"></span>
 							<span id="addressmsg" class="text-success"></span>
 						</div>
 					</div>
@@ -1414,7 +1433,7 @@
 					<ul class="nav flex-column nav-pills nav-pills-dark">
 						<!-- nav item -->
 						<li class="nav-item">
-							<a class="nav-link" href="../index.html">
+							<a class="nav-link" href="/home">
 								<i class="feather-icon icon-log-out me-2"></i>
 								Log out
 							</a>
@@ -1583,6 +1602,7 @@
 		<!-- Javascript-->
 		<script src="../../user/assets/js/accountAddress.js"></script>
 		<script src="../../user/assets/js/deleteAddress.js"></script>
+		<script src="../../user/assets/js/editAddress.js"></script>
 		<!-- Libs JS -->
 <!-- <script src="../libs/jquery/dist/jquery.min.js"></script> -->
 <script src="../libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

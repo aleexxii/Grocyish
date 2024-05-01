@@ -54,8 +54,34 @@ const deleteAddress = async (req, res) => {
   }
 };
 
+const postEditAddress = async (req,res)=>{
+    
+    const addressId = req.params.addressId
+
+    const { firstname, lastname, phone, address, state, district, city, pincode, landmark } = req.body
+    try {
+        await customerAddress.findByIdAndUpdate(addressId,{
+            firstname : firstname,
+            lastname : lastname,
+            phone : phone,
+            address : address,
+            state : state,
+            district : district,
+            city : city,
+            pincode : pincode,
+            landmark : landmark
+        },
+        {new : true})
+
+        return res.status(200).json({message : 'Updated' , redirect : '/account-address'})
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports = {
   getAddress,
   postAddress,
   deleteAddress,
+  postEditAddress
 };
